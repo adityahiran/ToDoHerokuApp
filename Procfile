@@ -1,0 +1,1 @@
+web: java -cp target/classes:target/dependency/* com.mashape.interview.ToDoHerokuApp.heroku.Main
