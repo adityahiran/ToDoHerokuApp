@@ -28,7 +28,7 @@ public class ToDoItems {
 	private ToDoService toDoService = new ToDoService();
     
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_XML)
     public Item getAllItems() {
         return toDoService.getAllItems();
     }
