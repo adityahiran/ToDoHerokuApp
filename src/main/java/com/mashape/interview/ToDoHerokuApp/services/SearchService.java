@@ -26,11 +26,12 @@ public class SearchService {
 	public static SearchService getInstance() {
 		if(instance == null) {
 			instance = new SearchService();
+			indexSampleItems();
 		}
 		return instance;
 	}
 	
-	 public void indexSampleItems() {
+	 public static void indexSampleItems() {
 
 	        Item article1 = new Item();
 	        article1.setId(6);
