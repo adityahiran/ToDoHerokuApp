@@ -9,6 +9,8 @@ public class Item {
 	private String body;
 	private boolean done;
 	
+	public Item() {}
+	
 	public Item(String title, String body, boolean done) {
 		this.title = title;
 		this.body = body;

@@ -1,5 +1,6 @@
 package com.mashape.interview.ToDoHerokuApp.services;
 
+import java.util.Iterator;
 import java.util.Set;
 
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
@@ -9,7 +10,10 @@ public class ToDoService {
 
 	private ToDoList toDoList = new ToDoList();
 	
-	public Set<Item> getAllItems() {
-		return toDoList.getAllItems();
+	public Item getAllItems() {
+		Set<Item> allItems = toDoList.getAllItems();
+		Iterator<Item> iterator = allItems.iterator();
+		if(iterator.hasNext()) return iterator.next();
+		return null;
 	}
 }

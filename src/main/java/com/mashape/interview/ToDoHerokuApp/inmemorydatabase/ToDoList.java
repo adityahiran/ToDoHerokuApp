@@ -10,7 +10,7 @@ import com.mashape.interview.ToDoHerokuApp.domains.Item;
 public class ToDoList {
 
 	private static Hashtable<Long, Item> inMemoryDatabase = new Hashtable<Long, Item>();
-	private static long lastIndex;
+	private static long lastIndex=0;
 	
 	public ToDoList() {
 		initData();
