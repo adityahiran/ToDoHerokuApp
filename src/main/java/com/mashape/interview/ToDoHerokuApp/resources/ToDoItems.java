@@ -48,7 +48,7 @@ public class ToDoItems {
     
     // Get the item with the specified title in the to-do list
     @GET
-    @Path("{title}")
+    @Path("title/{title}")
     @Produces(MediaType.APPLICATION_JSON)
     public Item getItemByTitle(@PathParam("title") String title) {
 		return toDoService.getItemByTitle(title);
@@ -56,7 +56,7 @@ public class ToDoItems {
     
     // Get all the items in the to-do list with the specified status
     @GET
-    @Path("{done}")
+    @Path("done/{done}")
     @Produces(MediaType.APPLICATION_JSON)
     public Set<Item> getItemsByStatus(@PathParam("done") String done) {
 		boolean status = Boolean.parseBoolean(done);
