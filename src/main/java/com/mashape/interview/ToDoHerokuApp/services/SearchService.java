@@ -33,6 +33,7 @@ public class SearchService {
 	 public void indexSampleItems() {
 
 	        Item article1 = new Item();
+	        article1.setId(6);
 	        article1.setDone(false);
 	        article1.setTitle("Develop the sample app given by Mashape");
 	        article1.setBody("Homeland follows the story of Drizzt from around the time and circumstances of his birth and his upbringing amongst the drow (dark elves). " +
@@ -41,6 +42,7 @@ public class SearchService {
 	                " one of Salvatore's more famous characters from the Icewind Dale Trilogy.");
 
 	        Item article2 = new Item();
+	        article2.setId(7);
 	        article2.setDone(true);
 	        article2.setTitle("Complete a brief tutorial on maven and heroku");
 	        article2.setBody("The Lord of the Rings is an epic high fantasy novel written by English philologist and University of Oxford professor J. R. R. Tolkien. " +
