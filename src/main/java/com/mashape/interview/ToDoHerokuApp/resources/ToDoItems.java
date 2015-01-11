@@ -29,7 +29,7 @@ public class ToDoItems {
     
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public Item getAllItems() {
+    public Set<Item> getAllItems() {
         return toDoService.getAllItems();
     }
 }

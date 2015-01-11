@@ -10,10 +10,10 @@ public class ToDoService {
 
 	private ToDoList toDoList = new ToDoList();
 	
-	public Item getAllItems() {
+	public Set<Item> getAllItems() {
 		Set<Item> allItems = toDoList.getAllItems();
-		Iterator<Item> iterator = allItems.iterator();
-		if(iterator.hasNext()) return iterator.next();
-		return null;
+		//Iterator<Item> iterator = allItems.iterator();
+		//if(iterator.hasNext()) return iterator.next();
+		return allItems;
 	}
 }
