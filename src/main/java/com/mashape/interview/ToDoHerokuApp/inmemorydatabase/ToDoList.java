@@ -38,9 +38,9 @@ public class ToDoList {
 		return inMemoryDatabase.get(id);
 	}
 	
-	public Item addItem(Item item) {
+	public Item addItem(String title) {
 		lastIndex++;
-		inMemoryDatabase.put(lastIndex, item);
+		inMemoryDatabase.put(lastIndex, new Item(title, "", false));
 		return inMemoryDatabase.get(lastIndex);
 	}
 	

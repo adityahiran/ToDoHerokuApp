@@ -22,8 +22,8 @@ public class ToDoService {
 		return itemById;
 	}
 
-	public Item saveItem(Item item) {
-		return toDoList.addItem(item);
+	public Item saveItem(String title) {
+		return toDoList.addItem(title);
 	}
 
 	public Item getItemByTitle(String title) {

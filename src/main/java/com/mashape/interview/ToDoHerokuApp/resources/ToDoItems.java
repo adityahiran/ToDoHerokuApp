@@ -66,8 +66,8 @@ public class ToDoItems {
     @POST
     @Path("{title}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Item saveItem(@NotNull@PathParam("title")Item item) {
-    	return toDoService.saveItem(item);
+    public Item saveItem(@NotNull@PathParam("title")String title) {
+    	return toDoService.saveItem(title);
     }
     
     
