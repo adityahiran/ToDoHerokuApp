@@ -27,7 +27,7 @@ public class ToDoList {
 		getInstance().getDatabaseInstance().put(++lastIndex, new Item("title2", "body2", false));
 	}
 	
-	public Set<Item> getAllItems() {
+	/*public Set<Item> getAllItems() {
 		Set<Item> items = new HashSet<Item>();
 		Set<Long> keySet = inMemoryDatabase.keySet();
 		Iterator<Long> iter = keySet.iterator();
@@ -101,7 +101,7 @@ public class ToDoList {
 				return inMemoryDatabase.remove(nextId); 
 		}
 		return null;
-	}
+	}*/
 	
 	 public static ToDoList getInstance() {
 	      if(instance == null) {
@@ -110,4 +110,8 @@ public class ToDoList {
 	      }
 	      return instance;
 	   }
+
+	public long getLastIndex() {
+		return lastIndex;
+	}
 }

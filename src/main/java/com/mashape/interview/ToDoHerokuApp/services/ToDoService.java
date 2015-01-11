@@ -5,12 +5,14 @@ import java.util.Set;
 
 import javax.inject.Inject;
 
+import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
+import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDaoImplementation;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
 
 public class ToDoService {
 
-	private ToDoList toDoList = ToDoList.getInstance();
+	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance();
 	
 	private static ToDoService instance = null;
 	
@@ -24,34 +26,32 @@ public class ToDoService {
 	}
 	
 	public Set<Item> getAllItems() {
-		Set<Item> allItems = toDoList.getAllItems();
-		//Iterator<Item> iterator = allItems.iterator();
-		//if(iterator.hasNext()) return iterator.next();
+		Set<Item> allItems = dao.getAllItems();
 		return allItems;
 	}
 
 	public Item getItemById(long id) {
-		Item itemById = toDoList.getItemById(id);
+		Item itemById = dao.getItemById(id);
 		return itemById;
 	}
 
 	public Item saveItem(String title) {
-		return toDoList.addItem(title);
+		return dao.addItem(title);
 	}
 
 	public Item getItemByTitle(String title) {
-		return toDoList.getItemByTitle(title);
+		return dao.getItemByTitle(title);
 	}
 
 	public Set<Item> getItemsByStatus(boolean status) {
-		return toDoList.getItemsByStatus(status);
+		return dao.getItemsByStatus(status);
 	}
 
 	public Item deleteItemById(long id) {
-		return toDoList.deleteItemByKey(id);
+		return dao.deleteItemByKey(id);
 	}
 
 	public Item deleteItemByTitle(String title) {
-		return toDoList.deleteItemByTitle(title);
+		return dao.deleteItemByTitle(title);
 	}
 }
