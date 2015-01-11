@@ -18,7 +18,7 @@ import com.mashape.interview.ToDoHerokuApp.services.ToDoService;
 /**
  * Root resource (exposed at "todoitems" path)
  */
-
+@Path("todolistitems")
 public class ToDoItems {
 
     /**
@@ -32,7 +32,6 @@ public class ToDoItems {
     
 	// Get all the items in the to-do list
     @GET
-    @Path("todolistitems")
     @Produces(MediaType.APPLICATION_JSON)
     public Set<Item> getAllItems() {
         return toDoService.getAllItems();
@@ -40,26 +39,26 @@ public class ToDoItems {
     
     // Get the item with the specified id in the to-do list
     @GET
-    @Path("todolistitems/item/{id}")
+    @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Item getItemById(@NotNull@PathParam("id") String id) {
+    public Item getItemById(@PathParam("id") String id) {
     	long idParsed = Long.parseLong(id);
 		return toDoService.getItemById(idParsed);
     }
     
     // Get the item with the specified title in the to-do list
     @GET
-    @Path("todolistitems/item/{title}")
+    @Path("{title}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Item getItemByTitle(@NotNull@PathParam("title") String title) {
+    public Item getItemByTitle(@PathParam("title") String title) {
 		return toDoService.getItemByTitle(title);
     }
     
     // Get all the items in the to-do list with the specified status
     @GET
-    @Path("todolistitems/item/{done}")
+    @Path("{done}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<Item> getItemsByStatus(@NotNull@PathParam("done") String done) {
+    public Set<Item> getItemsByStatus(@PathParam("done") String done) {
 		boolean status = Boolean.parseBoolean(done);
     	return toDoService.getItemsByStatus(status);
     }
