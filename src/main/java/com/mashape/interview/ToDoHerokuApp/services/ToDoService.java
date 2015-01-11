@@ -21,4 +21,8 @@ public class ToDoService {
 		Item itemById = toDoList.getItemById(id);
 		return itemById;
 	}
+
+	public Item saveItem(Item item) {
+		return toDoList.addItem(item);
+	}
 }

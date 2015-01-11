@@ -3,6 +3,7 @@ package com.mashape.interview.ToDoHerokuApp.resources;
 import java.util.Set;
 
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -34,19 +35,26 @@ public class ToDoItems {
         return toDoService.getAllItems();
     }
     
-    @GET
+    /*@GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Item getItemById(@PathParam("id") String id) {
     	long idParsed = Long.parseLong(id);
 		return toDoService.getItemById(idParsed);
-    }
+    }*/
     
-    /*@GET
+    /*@POST
+    @Path("{title}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Item saveItem(Item item) {
+    	return toDoService.saveItem(item);
+    }*/
+    
+    @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Item getItemQueriedById(@QueryParam("id") String id) {
     	long idParsed = Long.parseLong(id);
 		return toDoService.getItemById(idParsed);
-    }*/
+    }
 }
 
