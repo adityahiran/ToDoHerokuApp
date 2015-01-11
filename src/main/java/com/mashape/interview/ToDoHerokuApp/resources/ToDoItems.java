@@ -3,6 +3,7 @@ package com.mashape.interview.ToDoHerokuApp.resources;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -70,6 +71,12 @@ public class ToDoItems {
     	return toDoService.saveItem(title);
     }
     
-    
+    @DELETE
+    @Path("id/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Item deleteItemById(@NotNull@PathParam("id") String id) {
+    	long idParsed = Long.parseLong(id);
+		return toDoService.deleteItemById(idParsed);
+    }
 }
 

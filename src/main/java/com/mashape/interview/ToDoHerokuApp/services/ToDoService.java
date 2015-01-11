@@ -33,4 +33,8 @@ public class ToDoService {
 	public Set<Item> getItemsByStatus(boolean status) {
 		return toDoList.getItemsByStatus(status);
 	}
+
+	public Item deleteItemById(long id) {
+		return toDoList.deleteItemByKey(id);
+	}
 }
