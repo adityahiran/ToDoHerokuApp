@@ -78,5 +78,12 @@ public class ToDoItems {
     	long idParsed = Long.parseLong(id);
 		return toDoService.deleteItemById(idParsed);
     }
+    
+    @DELETE
+    @Path("title/{title}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Item deleteItemByTitle(@NotNull@PathParam("title") String title) {
+    	return toDoService.deleteItemByTitle(title);
+    }
 }
 

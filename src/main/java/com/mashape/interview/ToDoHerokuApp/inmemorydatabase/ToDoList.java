@@ -85,4 +85,16 @@ public class ToDoList {
 		}
 		return items;
 	}
+
+	public Item deleteItemByTitle(String title) {
+		Set<Long> keySet = inMemoryDatabase.keySet();
+		Iterator<Long> iterator = keySet.iterator();
+		while(iterator.hasNext()) {
+			Long nextId = iterator.next();
+			Item item = inMemoryDatabase.get(nextId);
+			if(item.getTitle().equalsIgnoreCase(title))
+				return inMemoryDatabase.remove(nextId); 
+		}
+		return null;
+	}
 }

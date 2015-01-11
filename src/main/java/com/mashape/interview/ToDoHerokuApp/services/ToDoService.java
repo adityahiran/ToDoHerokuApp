@@ -37,4 +37,8 @@ public class ToDoService {
 	public Item deleteItemById(long id) {
 		return toDoList.deleteItemByKey(id);
 	}
+
+	public Item deleteItemByTitle(String title) {
+		return toDoList.deleteItemByTitle(title);
+	}
 }
