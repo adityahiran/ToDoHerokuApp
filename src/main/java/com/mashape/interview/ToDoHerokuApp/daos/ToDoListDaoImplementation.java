@@ -41,7 +41,10 @@ public class ToDoListDaoImplementation implements ToDoListDao {
 	
 	public Item addItem(String title) {
 		lastIndex++;
-		databaseInstance.put(lastIndex, new Item(title, "", false));
+		Item item = new Item(title, "", false);
+		item.setId(lastIndex);
+		databaseInstance.put(lastIndex, item);
+		
 		return databaseInstance.get(lastIndex);
 	}
 	

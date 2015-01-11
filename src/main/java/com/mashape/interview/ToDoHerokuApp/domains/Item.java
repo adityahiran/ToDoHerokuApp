@@ -1,10 +1,17 @@
 package com.mashape.interview.ToDoHerokuApp.domains;
 
+import io.searchbox.annotations.JestId;
+
 import javax.xml.bind.annotation.XmlRootElement;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @XmlRootElement
 public class Item {
 
+	@JestId
+	@JsonIgnore
+	private long id;
 	private String title;
 	private String body;
 	private boolean done;
@@ -17,6 +24,13 @@ public class Item {
 		this.done = done;
 	}
 	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	public String getTitle() {
 		return title;
 	}

@@ -1,5 +1,6 @@
 package com.mashape.interview.ToDoHerokuApp.resources;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.inject.Inject;
@@ -15,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
+import com.mashape.interview.ToDoHerokuApp.services.SearchService;
 import com.mashape.interview.ToDoHerokuApp.services.ToDoService;
 
 /**
@@ -32,6 +34,7 @@ public class ToDoItems {
     
 	
 	private ToDoService toDoService = ToDoService.getInstance();
+	private SearchService searchService = SearchService.getInstance();
     
 	// Get all the items in the to-do list
     @GET
@@ -86,6 +89,13 @@ public class ToDoItems {
     @Produces(MediaType.APPLICATION_JSON)
     public Item deleteItemByTitle(@NotNull@PathParam("title") String title) {
     	return toDoService.deleteItemByTitle(title);
+    }
+    
+    @GET
+    @Path("search/{searchTerm}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Item> searchItem(@PathParam("searchTerm") String searchTerm) {
+    	return searchService.searchItems(searchTerm);
     }
 }
 
