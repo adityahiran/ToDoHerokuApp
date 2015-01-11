@@ -34,7 +34,7 @@ public class ToDoItems {
         return toDoService.getAllItems();
     }
     
-    @GET
+    /*@GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Item getItemById(@PathParam("id") String id) {
@@ -47,6 +47,6 @@ public class ToDoItems {
     public Item getItemQueriedById(@QueryParam("id") String id) {
     	long idParsed = Long.parseLong(id);
 		return toDoService.getItemById(idParsed);
-    }
+    }*/
 }
 
