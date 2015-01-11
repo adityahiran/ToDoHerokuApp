@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.services.ToDoService;
@@ -27,8 +28,8 @@ public class ToDoItems {
     
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<Item> getAllItems() {
-        return toDoService.getAllItems();
+    public Response getAllItems() {
+        return Response.ok(toDoService.getAllItems()).build();
     }
 }
 
