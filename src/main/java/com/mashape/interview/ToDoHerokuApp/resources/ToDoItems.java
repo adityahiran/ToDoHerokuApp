@@ -27,9 +27,9 @@ public class ToDoItems {
 	private ToDoService toDoService = new ToDoService();
     
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getAllItems() {
-        return Response.ok(toDoService.getAllItems()).build();
+    @Produces(MediaType.TEXT_PLAIN)
+    public String getAllItems() {
+        return "helo";//Response.ok(toDoService.getAllItems()).build();
     }
 }
 
