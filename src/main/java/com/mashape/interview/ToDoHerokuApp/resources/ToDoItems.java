@@ -63,12 +63,12 @@ public class ToDoItems {
     	return toDoService.getItemsByStatus(status);
     }
     
-    /*@POST
+    @POST
     @Path("{title}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Item saveItem(Item item) {
+    public Item saveItem(@NotNull@PathParam("title")Item item) {
     	return toDoService.saveItem(item);
-    }*/
+    }
     
     
 }
