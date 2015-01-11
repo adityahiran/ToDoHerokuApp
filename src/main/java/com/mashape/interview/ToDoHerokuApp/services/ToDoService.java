@@ -10,8 +10,18 @@ import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
 
 public class ToDoService {
 
-	@Inject
-	private ToDoList toDoList;
+	private ToDoList toDoList = ToDoList.getInstance();
+	
+	private static ToDoService instance = null;
+	
+	protected ToDoService() {}
+	
+	public static ToDoService getInstance() {
+		if(instance == null) {
+			instance = new ToDoService();
+		}
+		return instance;
+	}
 	
 	public Set<Item> getAllItems() {
 		Set<Item> allItems = toDoList.getAllItems();

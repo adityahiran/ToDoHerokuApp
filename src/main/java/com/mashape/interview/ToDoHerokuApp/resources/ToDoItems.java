@@ -30,8 +30,8 @@ public class ToDoItems {
      * @return String that will be returned as a text/plain response.
      */
     
-	@Inject
-	private ToDoService toDoService;
+	
+	private ToDoService toDoService = ToDoService.getInstance();
     
 	// Get all the items in the to-do list
     @GET

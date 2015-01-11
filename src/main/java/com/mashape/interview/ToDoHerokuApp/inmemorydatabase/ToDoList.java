@@ -10,16 +10,21 @@ import com.mashape.interview.ToDoHerokuApp.domains.Item;
 
 public class ToDoList {
 
+	private static ToDoList instance = null;
 	private static Hashtable<Long, Item> inMemoryDatabase = new Hashtable<Long, Item>();
 	private static long lastIndex=0;
 	
-	public ToDoList() {
-		initData();
+	protected ToDoList() {
+		// Doesn't allow instantiation of this class 
 	}
 	
-	private void initData() {
-		inMemoryDatabase.put(++lastIndex, new Item("title1", "body1", true));
-		inMemoryDatabase.put(++lastIndex, new Item("title2", "body2", false));
+	public static Hashtable<Long, Item> getDatabaseInstance() {
+		return inMemoryDatabase;
+	}
+	
+	private static void initData() {
+		getInstance().getDatabaseInstance().put(++lastIndex, new Item("title1", "body1", true));
+		getInstance().getDatabaseInstance().put(++lastIndex, new Item("title2", "body2", false));
 	}
 	
 	public Set<Item> getAllItems() {
@@ -97,4 +102,12 @@ public class ToDoList {
 		}
 		return null;
 	}
+	
+	 public static ToDoList getInstance() {
+	      if(instance == null) {
+	         instance = new ToDoList();
+	         initData();
+	      }
+	      return instance;
+	   }
 }
