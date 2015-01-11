@@ -41,12 +41,12 @@ public class ToDoItems {
     	long idParsed = Long.parseLong(id);
 		return toDoService.getItemById(idParsed);
     }
-    /*
+    
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Item getItemQueriedById(@QueryParam("id") String id) {
     	long idParsed = Long.parseLong(id);
 		return toDoService.getItemById(idParsed);
-    }*/
+    }
 }
 
