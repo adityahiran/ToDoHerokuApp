@@ -1,5 +1,8 @@
 package com.mashape.interview.ToDoHerokuApp.domains;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class Item {
 
 	private String title;
