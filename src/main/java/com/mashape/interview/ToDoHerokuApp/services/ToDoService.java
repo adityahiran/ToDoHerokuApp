@@ -3,12 +3,15 @@ package com.mashape.interview.ToDoHerokuApp.services;
 import java.util.Iterator;
 import java.util.Set;
 
+import javax.inject.Inject;
+
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
 
 public class ToDoService {
 
-	private ToDoList toDoList = new ToDoList();
+	@Inject
+	private ToDoList toDoList;
 	
 	public Set<Item> getAllItems() {
 		Set<Item> allItems = toDoList.getAllItems();

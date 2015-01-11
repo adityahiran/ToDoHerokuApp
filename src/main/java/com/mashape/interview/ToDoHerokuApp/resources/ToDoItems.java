@@ -2,6 +2,7 @@ package com.mashape.interview.ToDoHerokuApp.resources;
 
 import java.util.Set;
 
+import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
@@ -29,7 +30,8 @@ public class ToDoItems {
      * @return String that will be returned as a text/plain response.
      */
     
-	private ToDoService toDoService = new ToDoService();
+	@Inject
+	private ToDoService toDoService;
     
 	// Get all the items in the to-do list
     @GET
