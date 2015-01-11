@@ -1,5 +1,6 @@
 package com.mashape.interview.ToDoHerokuApp.inmemorydatabase;
 
+import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
@@ -58,5 +59,30 @@ public class ToDoList {
 	
 	public Item searchItemById(long id) {
 		return inMemoryDatabase.get(id);
+	}
+
+	public Item getItemByTitle(String title) {
+		Set<Long> keySet = inMemoryDatabase.keySet();
+		Iterator<Long> iterator = keySet.iterator();
+		while(iterator.hasNext()) {
+			Long nextId = iterator.next();
+			Item item = inMemoryDatabase.get(nextId);
+			if(item.getTitle().equalsIgnoreCase(title))
+				return item; 
+		}
+		return null;
+	}
+
+	public Set<Item> getItemsByStatus(boolean status) {
+		Set<Item> items = new HashSet<Item>();
+		Set<Long> keySet = inMemoryDatabase.keySet();
+		Iterator<Long> iterator = keySet.iterator();
+		while(iterator.hasNext()) {
+			Long nextId = iterator.next();
+			Item item = inMemoryDatabase.get(nextId);
+			if(item.isDone()==status)
+				items.add(item);
+		}
+		return items;
 	}
 }

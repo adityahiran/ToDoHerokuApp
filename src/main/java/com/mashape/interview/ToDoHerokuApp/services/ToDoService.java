@@ -25,4 +25,12 @@ public class ToDoService {
 	public Item saveItem(Item item) {
 		return toDoList.addItem(item);
 	}
+
+	public Item getItemByTitle(String title) {
+		return toDoList.getItemByTitle(title);
+	}
+
+	public Set<Item> getItemsByStatus(boolean status) {
+		return toDoList.getItemsByStatus(status);
+	}
 }
