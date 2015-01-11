@@ -6,6 +6,7 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -31,6 +32,21 @@ public class ToDoItems {
     @Produces(MediaType.APPLICATION_JSON)
     public Set<Item> getAllItems() {
         return toDoService.getAllItems();
+    }
+    
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Item getItemById(@PathParam("id") String id) {
+    	long idParsed = Long.parseLong(id);
+		return toDoService.getItemById(idParsed);
+    }
+    
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    public Item getItemQueriedById(@QueryParam("id") String id) {
+    	long idParsed = Long.parseLong(id);
+		return toDoService.getItemById(idParsed);
     }
 }
 

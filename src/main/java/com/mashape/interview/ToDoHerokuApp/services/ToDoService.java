@@ -16,4 +16,9 @@ public class ToDoService {
 		//if(iterator.hasNext()) return iterator.next();
 		return allItems;
 	}
+
+	public Item getItemById(long id) {
+		Item itemById = toDoList.getItemById(id);
+		return itemById;
+	}
 }
