@@ -39,7 +39,7 @@ public class ToDoItems {
 	
 	// HTTP REQUEST METHOD: GET
 	
-	// Get all the items in the to-do list
+	// Get all the items in the to-do list -SUCCESS
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Set<Item> getAllItems() {
@@ -55,7 +55,7 @@ public class ToDoItems {
 		return toDoService.getItemById(idParsed);
     }*/
     
-    // Get the item with the specified title in the to-do list
+    // Get the item with the specified title in the to-do list - SUCCESS
     @GET
     @Path("{title}")
     @Produces(MediaType.APPLICATION_JSON)
@@ -72,7 +72,7 @@ public class ToDoItems {
     	return toDoService.getItemsByStatus(status);
     }*/
     
-    // Get all the completed todo list items
+    // Get all the completed todo list items - SUCCESS
     @GET
     @Path("done")
     @Produces(MediaType.APPLICATION_JSON)
@@ -81,7 +81,7 @@ public class ToDoItems {
     	return toDoService.getItemsByStatus(status);
     }
     
-    // Get all the todo list items that are yet to be completed
+    // Get all the todo list items that are yet to be completed - SUCCESS
     @GET
     @Path("undone")
     @Produces(MediaType.APPLICATION_JSON)
