@@ -76,22 +76,22 @@ public class SearchService {
 			// DeleteIndex.Builder("articles").build();
 			// jestClient.execute(deleteIndex);
 
-			IndicesExists indicesExists = new IndicesExists.Builder("items")
+			/*IndicesExists indicesExists = new IndicesExists.Builder("items")
 					.build();
-			JestResult result = jestClient.execute(indicesExists);
+			JestResult result = jestClient.execute(indicesExists);*/
 
-			if (!result.isSucceeded()) {
+			//if (!result.isSucceeded()) {
 				// Create items index
 				CreateIndex createIndex = new CreateIndex.Builder("items")
 						.build();
 				jestClient.execute(createIndex);
-			}
+			//}
 
 			/**
 			 * if you don't want to use bulk api use below code in a loop.
 			 *
 			 * Index index = new
-			 * Index.Builder(source).index("articles").type("article").build();
+			 * Index.Builder(source).index("items").type("item").build();
 			 * jestClient.execute(index);
 			 *
 			 */
@@ -108,9 +108,7 @@ public class SearchService {
 			
 			//Builder bulkBuilder = new Bulk.Builder();
 			for(Item source : allItems) {
-				long id = source.getId();
-				String s = String.valueOf(id);
-				Index index = new Index.Builder(source).index("items").type("item").id(s).build();
+				Index index = new Index.Builder(source).index("items").type("item").build();
 				jestClient.execute(index);
 				//bulkBuilder.addAction(index);
 			}
