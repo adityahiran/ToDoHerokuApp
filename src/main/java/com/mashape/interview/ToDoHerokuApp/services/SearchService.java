@@ -23,6 +23,7 @@ import io.searchbox.core.Bulk.Builder;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.indices.CreateIndex;
+import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.IndicesExists;
 
 public class SearchService {
@@ -76,6 +77,9 @@ public class SearchService {
 			// DeleteIndex.Builder("articles").build();
 			// jestClient.execute(deleteIndex);
 
+			DeleteIndex deleteIndex = new DeleteIndex.Builder("items").build();
+			jestClient.execute(deleteIndex);
+			
 			/*IndicesExists indicesExists = new IndicesExists.Builder("items")
 					.build();
 			JestResult result = jestClient.execute(indicesExists);*/
