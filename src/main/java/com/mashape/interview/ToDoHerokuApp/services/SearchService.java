@@ -101,23 +101,29 @@ public class SearchService {
 			 *
 			 */
 
-			/*Bulk bulk = new Bulk.Builder()
+			Item[] array = (Item[])allItems.toArray();
+			Item x=array[0];
+			Item y=array[1];
+			
+			
+			Bulk bulk = new Bulk.Builder()
 					.addAction(
-							new Index.Builder(article1).index("items")
+							new Index.Builder(x).index("items")
 									.type("item").build())
 					.addAction(
-							new Index.Builder(article2).index("items")
+							new Index.Builder(y).index("items")
 									.type("item").build()).build();
 
-			result = jestClient.execute(bulk);*/
+			result = jestClient.execute(bulk);
 			
 			//Builder bulkBuilder = new Bulk.Builder();
-			for(Item source : allItems) {
+			/*for(int i = 0 ; i< allItems.size(); i++) {
+				
 				
 				Index index = new Index.Builder(source).index("items").type("item").build();
 				jestClient.execute(index);
 				//bulkBuilder.addAction(index);
-			}
+			}*/
 			//Bulk bulk = new Bulk(bulkBuilder);
 			//result = jestClient.execute(bulk);
 
