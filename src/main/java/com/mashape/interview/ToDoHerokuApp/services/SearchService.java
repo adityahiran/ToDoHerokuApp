@@ -35,7 +35,6 @@ public class SearchService {
 	public static SearchService getInstance() {
 		if (instance == null) {
 			instance = new SearchService();
-			indexSampleItems();
 		}
 		return instance;
 	}
@@ -112,6 +111,7 @@ public class SearchService {
 			
 			//Builder bulkBuilder = new Bulk.Builder();
 			for(Item source : allItems) {
+				
 				Index index = new Index.Builder(source).index("items").type("item").build();
 				jestClient.execute(index);
 				//bulkBuilder.addAction(index);
@@ -131,6 +131,10 @@ public class SearchService {
 
 	public List<Item> searchItems(String param) {
 		try {
+			
+			// Initialize index
+			indexSampleItems();
+			
 			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 			searchSourceBuilder.query(QueryBuilders.queryString(param));
 
