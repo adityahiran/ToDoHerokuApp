@@ -47,30 +47,30 @@ public class ToDoItems {
     }
     
     // Get the item with the specified id in the to-do list
-    @GET
+    /*@GET
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Item getItemById(@PathParam("id") String id) {
     	long idParsed = Long.parseLong(id);
 		return toDoService.getItemById(idParsed);
-    }
+    }*/
     
     // Get the item with the specified title in the to-do list
     @GET
-    @Path("title/{title}")
+    @Path("{title}")
     @Produces(MediaType.APPLICATION_JSON)
     public Item getItemByTitle(@PathParam("title") String title) {
 		return toDoService.getItemByTitle(title);
     }
     
     // Get all the items in the to-do list with the specified status
-    @GET
+    /*@GET
     @Path("done/{done}")
     @Produces(MediaType.APPLICATION_JSON)
     public Set<Item> getItemsByStatus(@PathParam("done") String done) {
 		boolean status = Boolean.parseBoolean(done);
     	return toDoService.getItemsByStatus(status);
-    }
+    }*/
     
     // Get all the completed todo list items
     @GET
@@ -83,7 +83,7 @@ public class ToDoItems {
     
     // Get all the todo list items that are yet to be completed
     @GET
-    @Path("done")
+    @Path("undone")
     @Produces(MediaType.APPLICATION_JSON)
     public Set<Item> getItemsYetToComplete() {
 		boolean status = false;
@@ -99,18 +99,18 @@ public class ToDoItems {
     
     // HTTP REQUEST METHOD: POST
     
-    @POST
+    /*@POST
     @Path("{title}/{body}/{done}")
     @Produces(MediaType.APPLICATION_JSON)
     public Item saveItemByTitle(@NotNull@PathParam("title")String title, @PathParam("body")String body, @PathParam("done") String done ) {
     	boolean doneFlag = Boolean.parseBoolean(done);
     	return toDoService.saveItem(title, body, doneFlag);	// TODO
-    }
+    }*/
     
     // HTTP REQUEST METHOD: DELETE
     
     // TODO REMOVE THIS METHOD
-    @DELETE
+    /*@DELETE
     @Path("id/{id}")
     @Produces(MediaType.APPLICATION_JSON)
     public Item deleteItemById(@NotNull@PathParam("id") String id) {
@@ -145,10 +145,10 @@ public class ToDoItems {
     @Produces(MediaType.APPLICATION_JSON)
     public Set<Item> deleteAllItems() {
         return toDoService.deletAllItems();
-    }
+    }*/
     
     // HTTP REQUEST METHOD: PUT
-    @PUT
+   /* @PUT
     @Path("{old-title}/{new-title}/{new-body}")
     @Produces(MediaType.APPLICATION_JSON)
     public void updateItem(@NotNull@PathParam("old-title")String oldTitle, @NotNull@PathParam("new-title")String newTitle, @PathParam("new-body")String newBody) {
@@ -161,6 +161,6 @@ public class ToDoItems {
     @Produces(MediaType.APPLICATION_JSON)
     public void markItemAsDone(@NotNull@PathParam("title")String title) {
     	toDoService.markItemAsDone(title);
-    }
+    }*/
 }
 
