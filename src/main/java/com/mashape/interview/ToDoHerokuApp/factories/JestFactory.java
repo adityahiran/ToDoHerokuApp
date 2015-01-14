@@ -16,7 +16,7 @@ public class JestFactory {
 			String connectionUrl = "https://site:feadc2f4d2e573c710cad584185a8965@bofur-us-east-1.searchly.com";
 			JestClientFactory factory = new JestClientFactory();
 			factory.setHttpClientConfig(new HttpClientConfig.Builder(
-					connectionUrl).multiThreaded(false).build());
+					connectionUrl).multiThreaded(true).build());
 			JestClient client = factory.getObject();
 			return client;
 		}

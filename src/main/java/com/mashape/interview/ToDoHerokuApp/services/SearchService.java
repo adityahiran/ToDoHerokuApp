@@ -31,10 +31,12 @@ public class SearchService {
 	private static SearchService instance = null;
 	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance();
 	private static JestClient jestClient = JestFactory.getJestClient();
+	private static boolean initialized = false;
 
 	public static SearchService getInstance() {
 		if (instance == null) {
 			instance = new SearchService();
+			indexSampleItems();
 		}
 		return instance;
 	}
@@ -76,19 +78,19 @@ public class SearchService {
 			// DeleteIndex.Builder("articles").build();
 			// jestClient.execute(deleteIndex);
 
-			DeleteIndex deleteIndex = new DeleteIndex.Builder("items").build();
-			jestClient.execute(deleteIndex);
+			//DeleteIndex deleteIndex = new DeleteIndex.Builder("items").build();
+			//jestClient.execute(deleteIndex);
 			
-			/*IndicesExists indicesExists = new IndicesExists.Builder("items")
+			IndicesExists indicesExists = new IndicesExists.Builder("items")
 					.build();
-			JestResult result = jestClient.execute(indicesExists);*/
+			JestResult result = jestClient.execute(indicesExists);
 
-			//if (!result.isSucceeded()) {
+			if (!result.isSucceeded()) {
 				// Create items index
 				CreateIndex createIndex = new CreateIndex.Builder("items")
 						.build();
 				jestClient.execute(createIndex);
-			//}
+			}
 
 			/**
 			 * if you don't want to use bulk api use below code in a loop.
@@ -119,6 +121,7 @@ public class SearchService {
 			//Bulk bulk = new Bulk(bulkBuilder);
 			//result = jestClient.execute(bulk);
 
+			initialized=true;
 		} catch (IOException e) {
 			// logger.error("Indexing error", e);
 			e.printStackTrace();
@@ -133,7 +136,8 @@ public class SearchService {
 		try {
 			
 			// Initialize index
-			indexSampleItems();
+			//indexSampleItems();
+			if(!initialized) indexSampleItems();
 			
 			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 			searchSourceBuilder.query(QueryBuilders.queryString(param));
