@@ -106,12 +106,14 @@ public class SearchService {
 
 			result = jestClient.execute(bulk);*/
 			
-			Builder bulkBuilder = new Bulk.Builder();
+			//Builder bulkBuilder = new Bulk.Builder();
 			for(Item item : allItems) {
-				bulkBuilder.addAction(new Index.Builder(item).index("items").type("item").build());
+				Index index = new Index.Builder(item).index("items").type("item").build();
+				jestClient.execute(index);
+				//bulkBuilder.addAction(index);
 			}
-			Bulk bulk = new Bulk(bulkBuilder);
-			result = jestClient.execute(bulk);
+			//Bulk bulk = new Bulk(bulkBuilder);
+			//result = jestClient.execute(bulk);
 
 		} catch (IOException e) {
 			// logger.error("Indexing error", e);
