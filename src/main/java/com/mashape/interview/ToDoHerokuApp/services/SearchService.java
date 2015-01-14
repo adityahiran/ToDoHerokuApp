@@ -140,7 +140,7 @@ public class SearchService {
 
 			// QueryBuilder queryBuilder = filteredQuery(termQuery("brief",
 			// "jazz"));
-			Search search = new Search.Builder(searchSourceBuilder.toString())
+			Search search = (Search)new Search.Builder(searchSourceBuilder.toString())
 					.addIndex("items").addType("item").build();
 
 			JestResult result = jestClient.execute(search);
