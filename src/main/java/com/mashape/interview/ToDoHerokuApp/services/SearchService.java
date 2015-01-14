@@ -19,6 +19,7 @@ import com.mashape.interview.ToDoHerokuApp.factories.JestFactory;
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
 import io.searchbox.core.Bulk;
+import io.searchbox.core.Bulk.Builder;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.indices.CreateIndex;
@@ -104,15 +105,13 @@ public class SearchService {
 									.type("item").build()).build();
 
 			result = jestClient.execute(bulk);*/
-			StringBuffer json = new StringBuffer("");
+			
+			Builder bulkBuilder = new Bulk.Builder();
 			for(Item item : allItems) {
-				Index index = new Index.Builder(item).index("items").type("item").build();
-				JestResult execute = jestClient.execute(index);
-				String jsonString = execute.getJsonString();
-				json.append(jsonString);
+				bulkBuilder.addAction(new Index.Builder(item).index("items").type("item").build());
 			}
-
-			System.out.println(json);
+			Bulk bulk = new Bulk(bulkBuilder);
+			result = jestClient.execute(bulk);
 
 		} catch (IOException e) {
 			// logger.error("Indexing error", e);
