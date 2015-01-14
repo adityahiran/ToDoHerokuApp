@@ -107,10 +107,11 @@ public class SearchService {
 			result = jestClient.execute(bulk);*/
 			
 			//Builder bulkBuilder = new Bulk.Builder();
-			for(Item item : allItems) {
-				if(allItems.size()>1) {
-				Index index = new Index.Builder(item).index("items").type("item").build();
-				jestClient.execute(index);}
+			for(Item source : allItems) {
+				long id = source.getId();
+				String s = String.valueOf(id);
+				Index index = new Index.Builder(source).index("items").type("item").id(s).build();
+				jestClient.execute(index);
 				//bulkBuilder.addAction(index);
 			}
 			//Bulk bulk = new Bulk(bulkBuilder);
