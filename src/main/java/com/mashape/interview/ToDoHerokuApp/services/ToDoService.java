@@ -35,8 +35,8 @@ public class ToDoService {
 		return itemById;
 	}
 
-	public Item saveItem(String title) {
-		return dao.addItem(title);
+	public Item saveItem(String title, String body, boolean done) {
+		return dao.addItem(title, body, done);
 	}
 
 	public Item getItemByTitle(String title) {
@@ -53,5 +53,17 @@ public class ToDoService {
 
 	public Item deleteItemByTitle(String title) {
 		return dao.deleteItemByTitle(title);
+	}
+
+	public Set<Item> deletAllItems() {
+		return dao.deleteAllItems();
+	}
+
+	public void updateItem(String oldTitle, String newTitle, String newBody) {
+		dao.updateItem(oldTitle, newTitle, newBody);
+	}
+
+	public void markItemAsDone(String title) {
+		dao.markItemAsDone(title);
 	}
 }

@@ -3,8 +3,12 @@ package com.mashape.interview.ToDoHerokuApp.services;
 import java.io.IOException;
 import java.util.List;
 
+import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
+
+import static org.elasticsearch.index.query.QueryBuilders.filteredQuery;
+import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.factories.JestFactory;
@@ -96,6 +100,7 @@ public class SearchService {
 	            SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 	            searchSourceBuilder.query(QueryBuilders.queryString(param));
 
+	            //QueryBuilder queryBuilder = filteredQuery(termQuery("brief", "jazz"));
 	            Search search = new Search.Builder(searchSourceBuilder.toString())
 	                    .addIndex("items")
 	                    .addType("item")

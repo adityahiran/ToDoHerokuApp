@@ -12,7 +12,7 @@ public interface ToDoListDao {
 	
 	public Item getItemById(long id);
 	
-	public Item addItem(String title);
+	public Item addItem(String title, String body, boolean done);
 	
 	public Item updateItemById(long id, Item item);
 	
@@ -25,4 +25,10 @@ public interface ToDoListDao {
 	public Set<Item> getItemsByStatus(boolean status);
 
 	public Item deleteItemByTitle(String title);
+
+	public Set<Item> deleteAllItems();
+
+	public void updateItem(String oldTitle, String newTitle, String newBody);
+
+	public void markItemAsDone(String title);
 }
