@@ -85,7 +85,7 @@ public class SearchService {
 			IndicesExists indicesExists = new IndicesExists.Builder("items")
 					.build();
 			JestResult result = jestClient.execute(indicesExists);
-
+			Thread.sleep(100);
 			if (!result.isSucceeded()) {
 				// Create items index
 				CreateIndex createIndex = new CreateIndex.Builder("items")
@@ -142,7 +142,7 @@ public class SearchService {
 			
 			// Initialize index
 			//indexSampleItems();
-			if(!initialized) indexSampleItems();
+			//if(!initialized) indexSampleItems();
 			
 			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 			searchSourceBuilder.query(QueryBuilders.queryString(param));
