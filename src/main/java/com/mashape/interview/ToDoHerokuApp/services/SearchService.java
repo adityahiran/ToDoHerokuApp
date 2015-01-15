@@ -82,13 +82,13 @@ public class SearchService {
 			//DeleteIndex deleteIndex = new DeleteIndex.Builder("items").build();
 			//jestClient.execute(deleteIndex);
 			
-			IndicesExists indicesExists = new IndicesExists.Builder("items")
+			IndicesExists indicesExists = new IndicesExists.Builder("itemsNew")
 					.build();
 			JestResult result = jestClient.execute(indicesExists);
-			Thread.sleep(100);
+
 			if (!result.isSucceeded()) {
 				// Create items index
-				CreateIndex createIndex = new CreateIndex.Builder("items")
+				CreateIndex createIndex = new CreateIndex.Builder("itemsNew")
 						.build();
 				jestClient.execute(createIndex);
 			}
@@ -109,10 +109,10 @@ public class SearchService {
 			
 			Bulk bulk = new Bulk.Builder()
 					.addAction(
-							new Index.Builder(x).index("items")
+							new Index.Builder(x).index("itemsNew")
 									.type("item").build())
 					.addAction(
-							new Index.Builder(y).index("items")
+							new Index.Builder(y).index("itemsNew")
 									.type("item").build()).build();
 
 			result = jestClient.execute(bulk);
@@ -150,7 +150,7 @@ public class SearchService {
 			// QueryBuilder queryBuilder = filteredQuery(termQuery("brief",
 			// "jazz"));
 			Search search = (Search)new Search.Builder(searchSourceBuilder.toString())
-					.addIndex("items").addType("item").build();
+					.addIndex("itemsNew").addType("item").build();
 
 			JestResult result = jestClient.execute(search);
 			return result.getSourceAsObjectList(Item.class);
