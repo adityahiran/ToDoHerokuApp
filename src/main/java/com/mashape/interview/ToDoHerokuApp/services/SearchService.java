@@ -18,6 +18,8 @@ import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDaoImplementation;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.factories.JestFactory;
+import com.mashape.interview.ToDoHerokuApp.observable.IObservable;
+import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
@@ -29,7 +31,7 @@ import io.searchbox.indices.CreateIndex;
 import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.IndicesExists;
 
-public class SearchService {
+public class SearchService implements IObserver {
 
 	private static SearchService instance = null;
 	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance();
@@ -39,12 +41,12 @@ public class SearchService {
 	public static SearchService getInstance() {
 		if (instance == null) {
 			instance = new SearchService();
+			createElasticSearchIndex();
 		}
-		createElasticSearchIndex();
 		return instance;
 	}
 
-	public static void createElasticSearchIndex() {
+	private static void createElasticSearchIndex() {
 		try {
 			// Create a new index if there is no index already
 			IndicesExists indicesExists = new IndicesExists.Builder("items").build();
@@ -67,7 +69,7 @@ public class SearchService {
 		}
 	}
 	
-	public static void addDataToBeIndexed() {
+	private static void addDataToBeIndexed() {
 		Set<Item> allItems = dao.getAllItems();
 		Iterator<Item> iterator = allItems.iterator();
 		while(iterator.hasNext()) {
@@ -92,33 +94,7 @@ public class SearchService {
 
 		
 		
-		// Initialize data for creating a search index
-		Set<Item> allItems = dao.getAllItems();
 		
-		
-		 * Item article1 = new Item(); article1.setId(6);
-		 * article1.setDone(false);
-		 * article1.setTitle("Develop the sample app given by Mashape");
-		 * article1.setBody(
-		 * "Homeland follows the story of Drizzt from around the time and circumstances of his birth and his upbringing amongst the drow (dark elves). "
-		 * +
-		 * "The book takes the reader into Menzoberranzan, the drow home city. From here, the reader follows Drizzt on his quest to follow his principles in a land where such "
-		 * +
-		 * "feelings are threatened by all his family including his mother Matron Malice. In an essence, the book introduces Drizzt Do'Urden,"
-		 * +
-		 * " one of Salvatore's more famous characters from the Icewind Dale Trilogy."
-		 * );
-		 * 
-		 * Item article2 = new Item(); article2.setId(7);
-		 * article2.setDone(true);
-		 * article2.setTitle("Complete a brief tutorial on maven and heroku");
-		 * article2.setBody(
-		 * "The Lord of the Rings is an epic high fantasy novel written by English philologist and University of Oxford professor J. R. R. Tolkien. "
-		 * +
-		 * "The story began as a sequel to Tolkien's 1937 children's fantasy novel The Hobbit, but eventually developed into a much larger work. "
-		 * +
-		 * "It was written in stages between 1937 and 1949, much of it during World War II.[1] It is the third best-selling novel ever written, with over 150 million copies sold"
-		 * );
 		 
 
 		try {
@@ -210,12 +186,44 @@ public class SearchService {
 			return items;
 
 		} catch (IOException e) {
-			// logger.error("Search error", e);
 			e.printStackTrace();
 		} catch (Exception e) {
-			// logger.error("Search error", e);
 			e.printStackTrace();
 		}
 		return null;
+	}
+
+	@Override
+	public void update(Item itemLastModified, int invokingOperation) {
+		// invokingOperation=1 means a new record has been added to the database
+		// invokingOperation=2 means a record has been updated in the database
+		// invokingOperation=3 means an existing record has been deleted from the database
+		// invokingOperation=3 + itemLastModified==null means all existing records have been deleted from the database
+		switch(invokingOperation) {
+		case 1: indexAnItem(itemLastModified); break;
+		case 2: updateIndexOf(itemLastModified); break;
+		case 3: if(itemLastModified == null) deleteAllIndexes();
+				else deleteIndexOf(itemLastModified); 
+				break;
+		default: break;
+		}
+	}
+
+	private void deleteIndexOf(Item itemLastModified) {
+		String id = String.valueOf(itemLastModified.getId());
+		try {
+			jestClient.execute(new DeleteIndex.Builder(id).build());
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void deleteAllIndexes() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	private void updateIndexOf(Item itemLastModified) {
+		indexAnItem(itemLastModified);
 	}
 }

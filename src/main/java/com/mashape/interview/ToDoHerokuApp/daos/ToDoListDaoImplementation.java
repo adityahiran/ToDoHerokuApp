@@ -40,26 +40,15 @@ public class ToDoListDaoImplementation implements ToDoListDao {
 	}
 	
 	public Item addItem(String title, String body, boolean done) {
-		lastIndex++;
-		
-		// TODO Replace is with a factory.getInstance()
-		Item item = new Item(lastIndex, title, body, done);
-		databaseInstance.put(lastIndex, item);
-		
-		return databaseInstance.get(lastIndex);
+		return ToDoList.addRecord(title, body, done);
 	}
 	
 	public Item updateItemById(long id, Item item) {
-		if(databaseInstance.containsKey(id))
-			databaseInstance.put(id, item);	
-		else
-			System.out.println("Error");
-		
-		return databaseInstance.get(lastIndex);
+		return ToDoList.updateItemById(id, item);
 	}
 	
 	public Item deleteItemByKey(long id) {
-		return databaseInstance.remove(id);
+		return ToDoList.deleteItemById(id);
 	}
 	
 	public Item searchItemById(long id) {
@@ -92,55 +81,27 @@ public class ToDoListDaoImplementation implements ToDoListDao {
 	}
 
 	public Item deleteItemByTitle(String title) {
-		Set<Long> keySet = databaseInstance.keySet();
-		Iterator<Long> iterator = keySet.iterator();
-		while(iterator.hasNext()) {
-			Long nextId = iterator.next();
-			Item item = databaseInstance.get(nextId);
-			if(item.getTitle().equalsIgnoreCase(title))
-				return databaseInstance.remove(nextId); 
-		}
-		return null;
+		return ToDoList.deleteItemByTitle(title);
 	}
 
 	@Override
 	public Set<Item> deleteAllItems() {
-		Set<Item> set = new HashSet<Item>();
-		Set<Long> keySet = databaseInstance.keySet();
-		Iterator<Long> iterator = keySet.iterator();
-		while(iterator.hasNext()) {
-			Long nextId = iterator.next();
-			set.add(databaseInstance.remove(nextId)); 
-		}
-		return set;
+		return ToDoList.deleteAllItems();
 	}
 
 	@Override
-	public void updateItem(String oldTitle, String newTitle, String newBody) {
-		Set<Long> keySet = databaseInstance.keySet();
-		Iterator<Long> iterator = keySet.iterator();
-		while(iterator.hasNext()) {
-			Long nextId = iterator.next();
-			Item item = databaseInstance.get(nextId);
-			String titleInDb = item.getTitle();
-			String bodyInDb = item.getBody();
-			if(!titleInDb.equalsIgnoreCase(newTitle)) item.setTitle(newTitle);
-			if(newBody != null && !bodyInDb.equalsIgnoreCase(newBody)) item.setBody(newBody);
-		}
+	public Item updateItem(String oldTitle, String newTitle, String newBody) {
+		return ToDoList.updateItem(oldTitle, newTitle, newBody);
 	}
 
 	@Override
-	public void markItemAsDone(String title) {
-		Set<Long> keySet = databaseInstance.keySet();
-		Iterator<Long> iterator = keySet.iterator();
-		while(iterator.hasNext()) {
-			Long nextId = iterator.next();
-			Item item = databaseInstance.get(nextId);
-			String titleInDb = item.getTitle();
-			if(titleInDb.equalsIgnoreCase(title)) {
-				item.setDone(true);
-			}
-		}
+	public boolean markItemAsDone(String title) {
+		return ToDoList.markItemAsDone(title);
+	}
+
+	@Override
+	public Item getLastItem() {
+		return ToDoList.getLastItem();
 	}
 	
 	

@@ -28,7 +28,9 @@ public interface ToDoListDao {
 
 	public Set<Item> deleteAllItems();
 
-	public void updateItem(String oldTitle, String newTitle, String newBody);
+	public Item updateItem(String oldTitle, String newTitle, String newBody);
 
-	public void markItemAsDone(String title);
+	public boolean markItemAsDone(String title);
+
+	public Item getLastItem();
 }
