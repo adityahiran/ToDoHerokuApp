@@ -112,6 +112,7 @@ public class ToDoList {
 	         instance = new ToDoList();
 	         initData();
 	      }
+	      initData();
 	      return instance;
 	   }
 
