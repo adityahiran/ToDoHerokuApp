@@ -117,9 +117,7 @@ public class SearchService {
 			result = jestClient.execute(bulk);
 			
 			//Builder bulkBuilder = new Bulk.Builder();
-			/*for(int i = 0 ; i< allItems.size(); i++) {
-				
-				
+			/*for(Object source: allItems) {		
 				Index index = new Index.Builder(source).index("items").type("item").build();
 				jestClient.execute(index);
 				//bulkBuilder.addAction(index);
@@ -140,7 +138,8 @@ public class SearchService {
 
 	public List<Item> searchItems(String param) {
 		try {
-			
+			DeleteIndex deleteIndex = new DeleteIndex.Builder("items").build();
+			jestClient.execute(deleteIndex);
 			// Initialize index
 			//indexSampleItems();
 			if(!initialized) indexSampleItems();
