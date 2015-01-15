@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.elasticsearch.index.query.FilteredQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
@@ -191,10 +192,10 @@ public class SearchService {
 			//if(!initialized) indexSampleItems();
 			
 			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
-			searchSourceBuilder.query(QueryBuilders.queryString(param));
+			searchSourceBuilder.query(QueryBuilders.matchQuery("title", param));
 
-			// QueryBuilder queryBuilder = filteredQuery(termQuery("brief",
-			// "jazz"));
+			
+			// QueryBuilder queryBuilder = filteredQuery(termQuery("brief", param));
 			Search search = (Search)new Search.Builder(searchSourceBuilder.toString())
 					.addIndex("items").addType("item").build();
 
