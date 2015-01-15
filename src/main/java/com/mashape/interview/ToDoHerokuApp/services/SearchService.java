@@ -44,6 +44,8 @@ public class SearchService {
 
 	public static void indexSampleItems() {
 
+		jestClient.shutdownClient();
+		
 		// Initialize data for creating a search index
 		Set<Item> allItems = dao.getAllItems();
 		
