@@ -99,13 +99,13 @@ public class ToDoItems {
     
     // HTTP REQUEST METHOD: POST
     
-    /*@POST
+    @POST
     @Path("{title}/{body}/{done}")
     @Produces(MediaType.APPLICATION_JSON)
     public Item saveItemByTitle(@NotNull@PathParam("title")String title, @PathParam("body")String body, @PathParam("done") String done ) {
     	boolean doneFlag = Boolean.parseBoolean(done);
     	return toDoService.saveItem(title, body, doneFlag);	// TODO
-    }*/
+    }
     
     // HTTP REQUEST METHOD: DELETE
     
