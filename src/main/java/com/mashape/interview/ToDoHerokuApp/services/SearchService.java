@@ -197,10 +197,11 @@ public class SearchService {
 			List<Item> searchInTitleResultList = result.getSourceAsObjectList(Item.class);
 			
 			// Search in the body
-			searchSourceBuilder.query(QueryBuilders.matchQuery("body", param));
-			search = (Search)new Search.Builder(searchSourceBuilder.toString())
+			SearchSourceBuilder searchSourceBuilder2 = new SearchSourceBuilder();
+			searchSourceBuilder2.query(QueryBuilders.matchQuery("body", param));
+			Search search2 = (Search)new Search.Builder(searchSourceBuilder2.toString())
 					.addIndex("items").addType("item").build();
-			result = jestClient.execute(search);
+			result = jestClient.execute(search2);
 			List<Item> searchInBodyResultList = result.getSourceAsObjectList(Item.class);
 			
 			List<Item> items = new ArrayList<Item>();
