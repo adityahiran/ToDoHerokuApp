@@ -23,10 +23,9 @@ public class ToDoList {
 	}
 	
 	private static void initData() {
-		new Hashtable<Long, Item>();
 		lastIndex=0L;
 		getInstance().getDatabaseInstance().put(lastIndex, new Item("title1", "body1", true));
-		lastIndex+=1L;
+		lastIndex= lastIndex + 1L;
 		getInstance().getDatabaseInstance().put(lastIndex, new Item("title2", "body2", false));
 	}
 	
@@ -109,8 +108,8 @@ public class ToDoList {
 	 public static ToDoList getInstance() {
 	      if(instance == null) {
 	         instance = new ToDoList();
+	         initData();
 	      }
-	      initData();
 	      return instance;
 	   }
 
