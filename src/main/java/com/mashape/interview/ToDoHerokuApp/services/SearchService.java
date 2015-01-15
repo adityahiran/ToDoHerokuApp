@@ -1,6 +1,7 @@
 package com.mashape.interview.ToDoHerokuApp.services;
 
 import java.io.IOException;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -36,20 +37,62 @@ public class SearchService {
 	public static SearchService getInstance() {
 		if (instance == null) {
 			instance = new SearchService();
-			
 		}
-		indexSampleItems();
+		createElasticSearchIndex();
 		return instance;
 	}
 
-	public static void indexSampleItems() {
+	public static void createElasticSearchIndex() {
+		try {
+			// Create a new index if there is no index already
+			IndicesExists indicesExists = new IndicesExists.Builder("items").build();
+			JestResult result = jestClient.execute(indicesExists);
+			
+			if (!result.isSucceeded()) {
+				// Create items index
+				CreateIndex createIndex = new CreateIndex.Builder("itemsNew").build();
+				jestClient.execute(createIndex);
+	
+				// Add data to be indexed
+				addDataToBeIndexed();
+			}
+			
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void addDataToBeIndexed() {
+		Set<Item> allItems = dao.getAllItems();
+		Iterator<Item> iterator = allItems.iterator();
+		while(iterator.hasNext()) {
+			Item next = iterator.next();
+			indexAnItem(next);
+		}
+	}
+	
+	public static void indexAnItem(Item source) {
+		try {
+			Index index = new Index.Builder(source).index("items").type("item").build();
+			JestResult result = jestClient.execute(index);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	/*public static void indexSampleItems() {
 
 		
 		
 		// Initialize data for creating a search index
 		Set<Item> allItems = dao.getAllItems();
 		
-		/*
+		
 		 * Item article1 = new Item(); article1.setId(6);
 		 * article1.setDone(false);
 		 * article1.setTitle("Develop the sample app given by Mashape");
@@ -73,7 +116,7 @@ public class SearchService {
 		 * +
 		 * "It was written in stages between 1937 and 1949, much of it during World War II.[1] It is the third best-selling novel ever written, with over 150 million copies sold"
 		 * );
-		 */
+		 
 
 		try {
 			// Delete articles index if it is exists
@@ -95,14 +138,14 @@ public class SearchService {
 				jestClient.execute(createIndex);
 			}
 
-			/**
+			*//**
 			 * if you don't want to use bulk api use below code in a loop.
 			 *
 			 * Index index = new
 			 * Index.Builder(source).index("items").type("item").build();
 			 * jestClient.execute(index);
 			 *
-			 */
+			 *//*
 
 			Item[] array = (Item[])allItems.toArray();
 			Item x=array[0];
@@ -120,11 +163,11 @@ public class SearchService {
 			result = jestClient.execute(bulk);
 			
 			//Builder bulkBuilder = new Bulk.Builder();
-			/*for(Object source: allItems) {		
+			for(Object source: allItems) {		
 				Index index = new Index.Builder(source).index("items").type("item").build();
 				jestClient.execute(index);
 				//bulkBuilder.addAction(index);
-			}*/
+			}
 			//Bulk bulk = new Bulk(bulkBuilder);
 			//result = jestClient.execute(bulk);
 
@@ -137,7 +180,7 @@ public class SearchService {
 			e.printStackTrace();
 		}
 
-	}
+	}*/
 
 	public List<Item> searchItems(String param) {
 		try {
@@ -152,7 +195,7 @@ public class SearchService {
 			// QueryBuilder queryBuilder = filteredQuery(termQuery("brief",
 			// "jazz"));
 			Search search = (Search)new Search.Builder(searchSourceBuilder.toString())
-					.addIndex("itemsNew").addType("item").build();
+					.addIndex("items").addType("item").build();
 
 			JestResult result = jestClient.execute(search);
 			return result.getSourceAsObjectList(Item.class);

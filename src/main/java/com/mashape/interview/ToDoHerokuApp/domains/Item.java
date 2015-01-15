@@ -10,7 +10,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 public class Item {
 
 	@JestId
-	@JsonIgnore
 	private long id;
 	private String title;
 	private String body;
