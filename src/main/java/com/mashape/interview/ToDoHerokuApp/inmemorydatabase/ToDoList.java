@@ -27,6 +27,8 @@ public class ToDoList {
 		getInstance().getDatabaseInstance().put(lastIndex, new Item(lastIndex, "title1", "body1", true));
 		lastIndex= lastIndex + 1L;
 		getInstance().getDatabaseInstance().put(lastIndex, new Item(lastIndex, "title2", "body2", false));
+		lastIndex= lastIndex + 1L;
+		getInstance().getDatabaseInstance().put(lastIndex, new Item(lastIndex, "title3", "body2 title1", false));
 	}
 	
 	/*public Set<Item> getAllItems() {

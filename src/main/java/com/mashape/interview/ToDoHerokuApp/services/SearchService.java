@@ -1,6 +1,7 @@
 package com.mashape.interview.ToDoHerokuApp.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -187,20 +188,25 @@ public class SearchService {
 	public List<Item> searchItems(String param) {
 		try {
 			
-			// Initialize index
-			//indexSampleItems();
-			//if(!initialized) indexSampleItems();
-			
+			// Search in the title first
 			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 			searchSourceBuilder.query(QueryBuilders.matchQuery("title", param));
-
-			
-			// QueryBuilder queryBuilder = filteredQuery(termQuery("brief", param));
 			Search search = (Search)new Search.Builder(searchSourceBuilder.toString())
 					.addIndex("items").addType("item").build();
-
 			JestResult result = jestClient.execute(search);
-			return result.getSourceAsObjectList(Item.class);
+			List<Item> searchInTitleResultList = result.getSourceAsObjectList(Item.class);
+			
+			// Search in the body
+			searchSourceBuilder.query(QueryBuilders.matchQuery("body", param));
+			search = (Search)new Search.Builder(searchSourceBuilder.toString())
+					.addIndex("items").addType("item").build();
+			result = jestClient.execute(search);
+			List<Item> searchInBodyResultList = result.getSourceAsObjectList(Item.class);
+			
+			List<Item> items = new ArrayList<Item>();
+			items.addAll(searchInTitleResultList);
+			items.addAll(searchInBodyResultList);
+			return items;
 
 		} catch (IOException e) {
 			// logger.error("Search error", e);
