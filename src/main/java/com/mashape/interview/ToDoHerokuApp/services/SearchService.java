@@ -50,7 +50,7 @@ public class SearchService {
 			
 			if (!result.isSucceeded()) {
 				// Create items index
-				CreateIndex createIndex = new CreateIndex.Builder("itemsNew").build();
+				CreateIndex createIndex = new CreateIndex.Builder("items").build();
 				jestClient.execute(createIndex);
 	
 				// Add data to be indexed
