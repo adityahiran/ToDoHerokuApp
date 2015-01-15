@@ -23,8 +23,10 @@ public class ToDoList {
 	}
 	
 	private static void initData() {
-		getInstance().getDatabaseInstance().put(++lastIndex, new Item("title1", "body1", true));
-		getInstance().getDatabaseInstance().put(++lastIndex, new Item("title2", "body2", false));
+		lastIndex=0L;
+		getInstance().getDatabaseInstance().put(lastIndex, new Item("title1", "body1", true));
+		lastIndex+=1L;
+		getInstance().getDatabaseInstance().put(lastIndex, new Item("title2", "body2", false));
 	}
 	
 	/*public Set<Item> getAllItems() {
