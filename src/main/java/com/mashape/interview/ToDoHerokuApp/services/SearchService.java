@@ -27,6 +27,7 @@ import io.searchbox.client.JestResult;
 import io.searchbox.core.Bulk;
 import io.searchbox.core.Bulk.Builder;
 import io.searchbox.core.Delete;
+import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.indices.CreateIndex;
@@ -215,7 +216,9 @@ public class SearchService implements IObserver {
 	private void deleteIndexOf(Item itemLastModified) {
 		String id = String.valueOf(itemLastModified.getId());
 		try {
-			jestClient.execute(new Delete.Builder(id).build());
+			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
+			searchSourceBuilder.query(QueryBuilders.matchQuery("title", itemLastModified.getTitle()));
+			jestClient.execute(new DeleteByQuery.Builder(searchSourceBuilder.toString()).build());
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
