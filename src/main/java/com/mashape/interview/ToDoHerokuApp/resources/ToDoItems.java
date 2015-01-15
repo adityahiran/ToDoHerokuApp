@@ -148,13 +148,13 @@ public class ToDoItems {
     }*/
     
     // HTTP REQUEST METHOD: PUT
-   /* @PUT
+    @PUT
     @Path("{old-title}/{new-title}/{new-body}")
     @Produces(MediaType.APPLICATION_JSON)
     public void updateItem(@NotNull@PathParam("old-title")String oldTitle, @NotNull@PathParam("new-title")String newTitle, @PathParam("new-body")String newBody) {
     	toDoService.updateItem(oldTitle, newTitle, newBody);
     }
-    
+    /*
     // Mark a todo list item as done
     @PUT
     @Path("{title}/mark-as-done")
