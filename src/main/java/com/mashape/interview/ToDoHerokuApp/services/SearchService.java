@@ -36,8 +36,9 @@ public class SearchService {
 	public static SearchService getInstance() {
 		if (instance == null) {
 			instance = new SearchService();
-			indexSampleItems();
+			
 		}
+		indexSampleItems();
 		return instance;
 	}
 
