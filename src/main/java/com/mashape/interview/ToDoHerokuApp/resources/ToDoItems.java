@@ -116,7 +116,7 @@ public class ToDoItems {
     public Item deleteItemById(@NotNull@PathParam("id") String id) {
     	long idParsed = Long.parseLong(id);
 		return toDoService.deleteItemById(idParsed);
-    }
+    }*/
     
     @DELETE
     @Path("/{title}")
@@ -124,7 +124,7 @@ public class ToDoItems {
     public Item deleteItemByTitle(@NotNull@PathParam("title") String title) {
     	return toDoService.deleteItemByTitle(title);
     }
-    
+    /*
     @DELETE
     @Path("done")
     @Produces(MediaType.APPLICATION_JSON)
