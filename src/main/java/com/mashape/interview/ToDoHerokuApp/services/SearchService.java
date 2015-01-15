@@ -138,8 +138,7 @@ public class SearchService {
 
 	public List<Item> searchItems(String param) {
 		try {
-			DeleteIndex deleteIndex = new DeleteIndex.Builder("items").build();
-			jestClient.execute(deleteIndex);
+			
 			// Initialize index
 			//indexSampleItems();
 			if(!initialized) indexSampleItems();
