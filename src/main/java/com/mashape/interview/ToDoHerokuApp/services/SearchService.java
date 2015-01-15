@@ -76,7 +76,9 @@ public class SearchService {
 	
 	public static void indexAnItem(Item source) {
 		try {
-			JestResult result = jestClient.execute(new Index.Builder(source).index("items").type("item").build());
+			long id = source.getId();
+			String s = String.valueOf(id);
+			JestResult result = jestClient.execute(new Index.Builder(source).index("items").type("item").id(s).build());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
