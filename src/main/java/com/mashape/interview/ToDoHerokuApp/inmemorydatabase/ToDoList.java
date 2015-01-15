@@ -12,7 +12,7 @@ public class ToDoList {
 
 	private static ToDoList instance = null;
 	private static Hashtable<Long, Item> inMemoryDatabase = new Hashtable<Long, Item>();
-	private static long lastIndex=0;
+	private static long lastIndex=0L;
 	
 	protected ToDoList() {
 		// Doesn't allow instantiation of this class 
@@ -23,6 +23,7 @@ public class ToDoList {
 	}
 	
 	private static void initData() {
+		new Hashtable<Long, Item>();
 		lastIndex=0L;
 		getInstance().getDatabaseInstance().put(lastIndex, new Item("title1", "body1", true));
 		lastIndex+=1L;
@@ -108,8 +109,8 @@ public class ToDoList {
 	 public static ToDoList getInstance() {
 	      if(instance == null) {
 	         instance = new ToDoList();
-	         initData();
 	      }
+	      initData();
 	      return instance;
 	   }
 
