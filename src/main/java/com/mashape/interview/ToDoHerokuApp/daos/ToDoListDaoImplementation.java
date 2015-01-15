@@ -43,8 +43,7 @@ public class ToDoListDaoImplementation implements ToDoListDao {
 		lastIndex++;
 		
 		// TODO Replace is with a factory.getInstance()
-		Item item = new Item(title, body, done);
-		item.setId(lastIndex);
+		Item item = new Item(lastIndex, title, body, done);
 		databaseInstance.put(lastIndex, item);
 		
 		return databaseInstance.get(lastIndex);
