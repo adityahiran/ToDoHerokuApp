@@ -18,6 +18,7 @@ import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDaoImplementation;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.factories.JestFactory;
+import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
 import com.mashape.interview.ToDoHerokuApp.observable.IObservable;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
 
@@ -41,6 +42,7 @@ public class SearchService implements IObserver {
 	public static SearchService getInstance() {
 		if (instance == null) {
 			instance = new SearchService();
+			ToDoList.getInstance().addObserver(instance);
 			createElasticSearchIndex();
 		}
 		return instance;
