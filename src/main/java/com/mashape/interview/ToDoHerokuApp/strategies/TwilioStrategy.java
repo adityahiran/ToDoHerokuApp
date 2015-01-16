@@ -34,8 +34,22 @@ public class TwilioStrategy implements INotifyStrategy {
 	public void sendNotification(Item lastModiefiedItem) {
 
 		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
-		
-		 // Get the account and call factory class
+	    // Build a filter for the MessageList
+	    List<NameValuePair> params = new ArrayList<NameValuePair>();
+	    params.add(new BasicNameValuePair("Body", "Jenny please?! I love you <3"));
+	    params.add(new BasicNameValuePair("To", "+19168137782"));
+	    params.add(new BasicNameValuePair("From", "+19164321120"));
+	    params.add(new BasicNameValuePair("MediaUrl", "http://www.example.com/hearts.png"));
+	     
+	     
+	    MessageFactory messageFactory = client.getAccount().getMessageFactory();
+	    try {
+			Message message = messageFactory.create(params);
+		} catch (TwilioRestException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+/*		 // Get the account and call factory class
         Account acct = client.getAccount();
         SmsFactory smsFactory = acct.getSmsFactory();
 
@@ -63,6 +77,6 @@ public class TwilioStrategy implements INotifyStrategy {
             catch (TwilioRestException e) {
                 e.printStackTrace();
             }
-        }
+        }*/
 	}
 }
