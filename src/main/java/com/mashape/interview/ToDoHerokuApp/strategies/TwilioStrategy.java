@@ -41,9 +41,9 @@ public class TwilioStrategy implements INotifyStrategy {
 
         //build map of server admins
         Map<String,String> admins = new HashMap<String,String>();
-        admins.put("9164321120", "Poonam");
+        admins.put("9168137782", "Poonam");
 
-        String fromNumber = "916-769-8514";
+        String fromNumber = "916-432-1120";
 
     	// Iterate over all our server admins
         for (String toNumber : admins.keySet()) {
