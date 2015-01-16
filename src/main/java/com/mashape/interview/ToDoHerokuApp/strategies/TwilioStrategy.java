@@ -37,7 +37,7 @@ public class TwilioStrategy implements INotifyStrategy {
 	    // Build a filter for the MessageList
 	    List<NameValuePair> params = new ArrayList<NameValuePair>();
 	    params.add(new BasicNameValuePair("Body", "Jenny please?! I love you <3"));
-	    params.add(new BasicNameValuePair("To", "+19164321120"));
+	    params.add(new BasicNameValuePair("To", "+19167698514"));
 	    params.add(new BasicNameValuePair("From", "+19164321120"));
 	    params.add(new BasicNameValuePair("MediaUrl", "http://www.example.com/hearts.png"));
 	     
