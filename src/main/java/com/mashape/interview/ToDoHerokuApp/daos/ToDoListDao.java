@@ -30,7 +30,7 @@ public interface ToDoListDao {
 
 	public Item updateItem(String oldTitle, String newTitle, String newBody);
 
-	public boolean markItemAsDone(String title);
+	public Item markItemAsDone(String title);
 
 	public Item getLastItem();
 }
