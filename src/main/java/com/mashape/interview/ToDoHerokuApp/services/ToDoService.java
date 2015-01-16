@@ -63,7 +63,7 @@ public class ToDoService {
 		dao.updateItem(oldTitle, newTitle, newBody);
 	}
 
-	public void markItemAsDone(String title) {
-		dao.markItemAsDone(title);
+	public Item markItemAsDone(String title) {
+		return dao.markItemAsDone(title);
 	}
 }

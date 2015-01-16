@@ -158,8 +158,8 @@ public class ToDoItems {
     @PUT
     @Path("{title}/mark-as-done")
     @Produces(MediaType.APPLICATION_JSON)
-    public void markItemAsDone(@NotNull@PathParam("title")String title) {
-    	toDoService.markItemAsDone(title);
+    public Item markItemAsDone(@NotNull@PathParam("title")String title) {
+    	return toDoService.markItemAsDone(title);
     }
 }
 
