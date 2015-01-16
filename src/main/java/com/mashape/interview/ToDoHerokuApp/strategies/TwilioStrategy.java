@@ -38,18 +38,19 @@ public class TwilioStrategy implements INotifyStrategy {
 	    List<NameValuePair> params = new ArrayList<NameValuePair>();
 	    params.add(new BasicNameValuePair("Body", "Jenny please?! I love you <3"));
 	    params.add(new BasicNameValuePair("To", "+19167698514"));
-	    params.add(new BasicNameValuePair("From", "+19164321120"));
-	    params.add(new BasicNameValuePair("MediaUrl", "http://www.example.com/hearts.png"));
+	    params.add(new BasicNameValuePair("From", "+15005550006"));
+	    //params.add(new BasicNameValuePair("MediaUrl", "http://www.example.com/hearts.png"));
 	     
 	    
 	     
-	    MessageFactory messageFactory = client.getAccount().getMessageFactory();
+	    SmsFactory smsFactory = client.getAccount().getSmsFactory();
 	    try {
-			Message message = messageFactory.create(params);
+			Sms sms = smsFactory.create(params);
 		} catch (TwilioRestException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 /*		 // Get the account and call factory class
         Account acct = client.getAccount();
         SmsFactory smsFactory = acct.getSmsFactory();
