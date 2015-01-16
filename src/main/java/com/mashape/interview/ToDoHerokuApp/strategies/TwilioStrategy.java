@@ -33,7 +33,7 @@ public class TwilioStrategy implements INotifyStrategy {
 		// Build the parameters
 		List<NameValuePair> params = new ArrayList<NameValuePair>();
 		params.add(new BasicNameValuePair("Body", lastModiefiedItem.getTitle() + " task has been marked done."));
-	    params.add(new BasicNameValuePair("To", "+19168137782"));
+	    params.add(new BasicNameValuePair("To", "+19167698514"));
 		params.add(new BasicNameValuePair("From", "+19164321120"));
 
 		MessageFactory messageFactory = client.getAccount().getMessageFactory();
