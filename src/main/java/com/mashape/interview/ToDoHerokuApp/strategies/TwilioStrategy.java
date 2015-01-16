@@ -39,48 +39,18 @@ public class TwilioStrategy implements INotifyStrategy {
 	    params.add(new BasicNameValuePair("Body", "Jenny please?! I love you <3"));
 	    params.add(new BasicNameValuePair("To", "+19167698514"));
 	    params.add(new BasicNameValuePair("From", "+15005550006"));
-	    //params.add(new BasicNameValuePair("MediaUrl", "http://www.example.com/hearts.png"));
 
 	    try {
 	    	MessageFactory messageFactory = client.getAccount().getMessageFactory();
 	        Message message = messageFactory.create(params);
 	        System.out.println(message.getSid());
 	        boolean status = false;
-	        status = message.getStatus().equalsIgnoreCase("queued");
-			return status;
+	        //message.getStatus().equalsIgnoreCase("queued");
+			if(message.getSid()!=null) status = true;
+	        return status;
 		} catch (TwilioRestException e) {
 			e.printStackTrace();
 			return false;
 		}
-
-/*		 // Get the account and call factory class
-        Account acct = client.getAccount();
-        SmsFactory smsFactory = acct.getSmsFactory();
-
-        //build map of server admins
-        Map<String,String> admins = new HashMap<String,String>();
-        admins.put("9164321120", "Poonam");
-
-        String fromNumber = "916-432-1120";
-
-    	// Iterate over all our server admins
-        for (String toNumber : admins.keySet()) {
-            
-            //build map of post parameters 
-            Map<String,String> params = new HashMap<String,String>();
-            params.put("From", fromNumber);
-            params.put("To", toNumber);
-            params.put("Body", "Bad news " + admins.get(toNumber) + ", the server is down and it needs your help");
-
-            try {
-                // send an sms a call  
-                // ( This makes a POST request to the SMS/Messages resource)
-                Sms sms = smsFactory.create(params);
-                System.out.println("Success sending SMS: " + sms.getSid());
-            }
-            catch (TwilioRestException e) {
-                e.printStackTrace();
-            }
-        }*/
 	}
 }
