@@ -106,7 +106,7 @@ public class ToDoList implements IObservable {
 	}
 	
 	public static boolean markItemAsDone(String title) {
-		boolean ret = false;
+		Item ret = null;
 		Set<Long> keySet = inMemoryDatabase.keySet();
 		Iterator<Long> iterator = keySet.iterator();
 		while(iterator.hasNext()) {
@@ -115,11 +115,13 @@ public class ToDoList implements IObservable {
 			String titleInDb = item.getTitle();
 			if(titleInDb.equalsIgnoreCase(title)) {
 				item.setDone(true);
-				ret = item.isDone();
+				ret = item;
 				break;
 			}
 		}
-		return ret;
+		setChanged(true, 4, ret);
+		if(ret != null) return ret.isDone();
+		else return false;
 	}
 	
 	private static void initData() {

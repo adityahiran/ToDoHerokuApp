@@ -209,6 +209,7 @@ public class SearchService implements IObserver {
 		case 3: if(itemLastModified == null) deleteAllIndexes();
 				else deleteIndexOf(itemLastModified); 
 				break;
+		case 4: updateIndexOf(itemLastModified); break;
 		default: break;
 		}
 	}
