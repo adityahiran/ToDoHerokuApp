@@ -100,11 +100,10 @@ public class ToDoItems {
     // HTTP REQUEST METHOD: POST
     
     @POST
-    @Path("{title}/{body}/{done}")
+    @Path("{title}/{body}")
     @Produces(MediaType.APPLICATION_JSON)
-    public Item saveItemByTitle(@NotNull@PathParam("title")String title, @PathParam("body")String body, @PathParam("done") String done ) {
-    	boolean doneFlag = Boolean.parseBoolean(done);
-    	return toDoService.saveItem(title, body, doneFlag);	// TODO
+    public Item saveItemByTitle(@NotNull@PathParam("title")String title, @PathParam("body")String body ) {
+    	return toDoService.saveItem(title, body, false);	
     }
     
     // HTTP REQUEST METHOD: DELETE
@@ -154,13 +153,13 @@ public class ToDoItems {
     public void updateItem(@NotNull@PathParam("old-title")String oldTitle, @NotNull@PathParam("new-title")String newTitle, @PathParam("new-body")String newBody) {
     	toDoService.updateItem(oldTitle, newTitle, newBody);
     }
-    /*
+    
     // Mark a todo list item as done
     @PUT
     @Path("{title}/mark-as-done")
     @Produces(MediaType.APPLICATION_JSON)
     public void markItemAsDone(@NotNull@PathParam("title")String title) {
     	toDoService.markItemAsDone(title);
-    }*/
+    }
 }
 

@@ -119,6 +119,8 @@ public class ToDoList implements IObservable {
 				break;
 			}
 		}
+		
+		// Notify the observers about this change
 		setChanged(true, 4, ret);
 		if(ret != null) return ret.isDone();
 		else return false;
