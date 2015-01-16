@@ -20,8 +20,8 @@ import org.apache.http.message.BasicNameValuePair;
 public class TwilioStrategy implements INotifyStrategy {
 
 	private static TwilioStrategy instance = null;
-	public static final String ACCOUNT_SID = "ACad0b05acb0ff8d54e96a5684cdeed25d";
-	public static final String AUTH_TOKEN = "0263a083588152039b192a5ff9143ff1";
+	public static final String ACCOUNT_SID = "AC712fe2e4e8f5620f46d435a6dae8ab3e";//"ACad0b05acb0ff8d54e96a5684cdeed25d";
+	public static final String AUTH_TOKEN = "e5f01f52d8d37dbb142366a095819875";//"0263a083588152039b192a5ff9143ff1";
 
 	public static TwilioStrategy getInstance() {
 		if (instance == null) {
@@ -41,6 +41,7 @@ public class TwilioStrategy implements INotifyStrategy {
 	    params.add(new BasicNameValuePair("From", "+19164321120"));
 	    params.add(new BasicNameValuePair("MediaUrl", "http://www.example.com/hearts.png"));
 	     
+	    
 	     
 	    MessageFactory messageFactory = client.getAccount().getMessageFactory();
 	    try {
