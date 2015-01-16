@@ -25,7 +25,7 @@ public class NotifyService implements IObserver {
 	@Override
 	public void update(Item lastModifiedItem, int invokingOperation) {
 		boolean success = false;
-		if(invokingOperation == 4 && lastModifiedItem != null) {
+		if((invokingOperation == 4) && (lastModifiedItem != null)) {
 			success = notifyStrategy.sendNotification(lastModifiedItem);
 		} 
 		if(success) ToDoList.getInstance().addRecord("title5", "Created after twilio responded with a success code", false);
