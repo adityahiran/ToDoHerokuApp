@@ -31,7 +31,7 @@ public class TwilioStrategy implements INotifyStrategy {
 	}
 
 	@Override
-	public void sendNotification(Item lastModiefiedItem) {
+	public boolean sendNotification(Item lastModiefiedItem) {
 
 		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
 	    // Build a filter for the MessageList
@@ -40,15 +40,17 @@ public class TwilioStrategy implements INotifyStrategy {
 	    params.add(new BasicNameValuePair("To", "+19167698514"));
 	    params.add(new BasicNameValuePair("From", "+15005550006"));
 	    //params.add(new BasicNameValuePair("MediaUrl", "http://www.example.com/hearts.png"));
-	     
-	    
-	     
-	    SmsFactory smsFactory = client.getAccount().getSmsFactory();
+
 	    try {
-			Sms sms = smsFactory.create(params);
+	    	MessageFactory messageFactory = client.getAccount().getMessageFactory();
+	        Message message = messageFactory.create(params);
+	        System.out.println(message.getSid());
+	        boolean status = false;
+	        status = message.getStatus().equalsIgnoreCase("queued");
+			return status;
 		} catch (TwilioRestException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		}
 
 /*		 // Get the account and call factory class
