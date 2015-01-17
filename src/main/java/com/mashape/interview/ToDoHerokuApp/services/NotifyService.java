@@ -28,6 +28,6 @@ public class NotifyService implements IObserver {
 		if((invokingOperation == 4) && (lastModifiedItem != null)) {
 			success = notifyStrategy.sendNotification(lastModifiedItem);
 		} 
-		//if(success) ToDoList.addRecord("title5", "Created after twilio responded with a success code", false);
+		if(success) ToDoList.addRecord("title5", "Created after twilio responded with a success code", false);
 	}
 }
