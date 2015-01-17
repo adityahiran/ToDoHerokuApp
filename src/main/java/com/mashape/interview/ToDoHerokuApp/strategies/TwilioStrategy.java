@@ -68,7 +68,7 @@ public class TwilioStrategy implements INotifyStrategy {
 		
 		// Step1
 		Client client = ClientBuilder.newClient();
-		String url = "https://twilio.p.mashape.com/AC712fe2e4e8f5620f46d435a6dae8ab3e/SMS/Messages.json";
+		String url = "https://api.twilio.com/2010-04-01/Accounts/AC712fe2e4e8f5620f46d435a6dae8ab3e/Messages.json";
 		
 		// Step2
 		WebTarget target = client.target(url);
