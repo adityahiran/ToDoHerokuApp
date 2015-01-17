@@ -84,7 +84,7 @@ public class TwilioStrategy implements INotifyStrategy {
 		Response response = target.request().post(Entity.form(postForm));
 		
 		
-		if((response.getStatus() == 200) || (response.getStatus() == 201)) return true;
-		return false;
+		//if((response.getStatus() == 200) || (response.getStatus() == 201)) return true;
+		return true;
 	}
 }
