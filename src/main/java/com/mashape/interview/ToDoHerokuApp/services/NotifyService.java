@@ -24,7 +24,7 @@ public class NotifyService implements IObserver {
 
 	@Override
 	public void update(Item lastModifiedItem, int invokingOperation) {
-		boolean success = false;
+		boolean success = true;
 		if((invokingOperation == 4) && (lastModifiedItem != null)) {
 			success = notifyStrategy.sendNotification(lastModifiedItem);
 		} 
