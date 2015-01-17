@@ -70,11 +70,14 @@ public class TwilioStrategy implements INotifyStrategy {
 		Client client = ClientBuilder.newClient();
 		String url = "https://api.twilio.com/2010-04-01/Accounts/AC712fe2e4e8f5620f46d435a6dae8ab3e/Messages.json";
 		
-		// Step2
-		WebTarget target = client.target(url);
+		
 		
 		HttpAuthenticationFeature feature = HttpAuthenticationFeature.basicBuilder().credentials("AC712fe2e4e8f5620f46d435a6dae8ab3e", "e5f01f52d8d37dbb142366a095819875").build();
 		client.register(feature);
+		
+		// Step2
+		WebTarget target = client.target(url);
+				
 		MultivaluedHashMap<String, String> postForm = new MultivaluedHashMap<String, String>();
 		postForm.add("From", "+15005550006");
 		postForm.add("To", "+19168137782");
