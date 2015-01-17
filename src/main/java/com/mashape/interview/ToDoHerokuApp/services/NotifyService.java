@@ -28,6 +28,11 @@ public class NotifyService implements IObserver {
 		if((invokingOperation == 4) && (lastModifiedItem != null)) {
 			success = notifyStrategy.sendNotification(lastModifiedItem);
 		} 
-		if(success) ToDoList.addRecord("title5", "Created after twilio responded with a success code", false);
+		
+		// Having a trial account on twilio doesn't allow us to send free sms.
+		// Used this logic to see if twilio's response is a success. 
+		/*if(success) {
+			ToDoList.addRecord("title5", "Created after twilio responded with a success code", false);
+		}*/
 	}
 }
