@@ -12,6 +12,7 @@ import org.elasticsearch.common.mvel2.optimizers.impl.refl.nodes.Notify;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.observable.IObservable;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
+import com.mashape.interview.ToDoHerokuApp.services.NotifyService;
 
 public class ToDoList implements IObservable {
 
@@ -21,6 +22,7 @@ public class ToDoList implements IObservable {
 	private static long lastIndex=0L;
 	private static ArrayList<IObserver> observers = new ArrayList<IObserver>();
 	private static boolean changed = false;
+	private static NotifyService notifyService = NotifyService.getInstance();
 	//operation = 1 for create; 2 for update; 3 for delete
 	
 	protected ToDoList() {
@@ -121,9 +123,8 @@ public class ToDoList implements IObservable {
 		}
 		
 		// Notify the observers about this change
-		setChanged(true, 4, ret);
-		//if(ret != null) return ret.isDone();
-		//else return false;
+		//setChanged(true, 4, ret);
+		notifyService.update(ret, 4);
 		return ret;
 	}
 	
