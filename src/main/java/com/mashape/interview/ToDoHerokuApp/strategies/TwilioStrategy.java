@@ -5,6 +5,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.ws.rs.client.Client;
+import javax.ws.rs.client.ClientBuilder;
+import javax.ws.rs.client.Entity;
+import javax.ws.rs.client.WebTarget;
+import javax.ws.rs.core.MultivaluedHashMap;
+import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.twilio.sdk.TwilioRestClient;
 import com.twilio.sdk.TwilioRestException;
@@ -16,6 +24,7 @@ import com.twilio.sdk.resource.instance.Sms;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
+import org.glassfish.jersey.client.authentication.HttpAuthenticationFeature;
 
 public class TwilioStrategy implements INotifyStrategy {
 
@@ -30,7 +39,7 @@ public class TwilioStrategy implements INotifyStrategy {
 		return instance;
 	}
 
-	@Override
+	/*@Override
 	public boolean sendNotification(Item lastModiefiedItem) {
 
 		TwilioRestClient client = new TwilioRestClient(ACCOUNT_SID, AUTH_TOKEN);
@@ -52,5 +61,28 @@ public class TwilioStrategy implements INotifyStrategy {
 			e.printStackTrace();
 			return false;
 		}
+	}*/
+	
+	@Override
+	public boolean sendNotification(Item lastModiefiedItem) {
+		
+		// Step1
+		Client client = ClientBuilder.newClient();
+		String url = "https://api.twilio.com/2010-04-01/Accounts/AC712fe2e4e8f5620f46d435a6dae8ab3e/Messages.json";
+		
+		// Step2
+		WebTarget target = client.target(url);
+		
+		HttpAuthenticationFeature feature = HttpAuthenticationFeature.basicBuilder().credentials("AC712fe2e4e8f5620f46d435a6dae8ab3e", "e5f01f52d8d37dbb142366a095819875").build();
+		client.register(feature);
+		MultivaluedHashMap<String, String> postForm = new MultivaluedHashMap<String, String>();
+		postForm.add("From", "+15005550006");
+		postForm.add("To", "+19168137782");
+		postForm.add("Body", "Hello body");
+		
+		// Step3
+		Response response = target.request().post(Entity.form(postForm));
+		if(response.getStatus() == 200 || response.getStatus() == 201) return true;
+		return false;
 	}
 }
