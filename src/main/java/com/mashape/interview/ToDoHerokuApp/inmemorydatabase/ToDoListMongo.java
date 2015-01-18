@@ -37,12 +37,15 @@ public class ToDoListMongo implements ToDoListDao {
 
 	@Override
 	public String getAllItems() {
-
+//TODO
 		String ret="";
 		Set<Item> items = new HashSet<Item>();
 		DB db = client.getDB(ToDoAppConstants.getDbName());
 		DBCollection dbCollection = db.getCollection(ToDoAppConstants.getCollectionName());
-		DBCursor allItems = dbCollection.find();
+		//DBCursor allItems = dbCollection.find();
+		
+		DBObject findOne = dbCollection.findOne();
+		ret = (String) findOne.get("title");
 		//Iterator<DBObject> iterator = allItems.iterator();
 		/*while(allItems.hasNext()) {
 			DBObject next = allItems.next();
@@ -56,7 +59,7 @@ public class ToDoListMongo implements ToDoListDao {
 			String title = (String) next.get("title");
 			ret = title;
 		}*/
-		return allItems.toString();
+		return ret;
 	}
 
 	@Override
