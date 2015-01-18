@@ -14,13 +14,6 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
-import com.twilio.sdk.TwilioRestClient;
-import com.twilio.sdk.TwilioRestException;
-import com.twilio.sdk.resource.factory.MessageFactory;
-import com.twilio.sdk.resource.factory.SmsFactory;
-import com.twilio.sdk.resource.instance.Account;
-import com.twilio.sdk.resource.instance.Message;
-import com.twilio.sdk.resource.instance.Sms;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;

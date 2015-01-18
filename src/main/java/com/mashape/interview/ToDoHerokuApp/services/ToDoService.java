@@ -9,10 +9,11 @@ import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDaoImplementation;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
+import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoListMongo;
 
 public class ToDoService {
 
-	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance();
+	private static ToDoListDao dao = ToDoListMongo.getInstance(); //ToDoListDaoImplementation.getInstance();
 	
 	private static ToDoService instance = null;
 	
