@@ -54,7 +54,7 @@ public class ToDoListMongo implements ToDoListDao {
 			
 			Item item = new Item(id, title, body, done);
 			items.add(item);
-			ret = (String)next.get(title);
+			ret = next.get(title).toString();
 		}
 		return ret;
 	}
