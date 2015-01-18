@@ -30,7 +30,7 @@ public class ToDoFacade {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Set<Item> getAllItems() {
+	public String getAllItems() {
 		return toDoWrapper.getAllItems();
 	}
 

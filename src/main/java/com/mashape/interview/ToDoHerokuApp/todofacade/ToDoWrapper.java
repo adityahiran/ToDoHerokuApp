@@ -21,7 +21,7 @@ class ToDoWrapper {
 		return instance;
 	}
 	
-	public Set<Item> getAllItems() {
+	public String getAllItems() {
         return toDoService.getAllItems();
     }
 	

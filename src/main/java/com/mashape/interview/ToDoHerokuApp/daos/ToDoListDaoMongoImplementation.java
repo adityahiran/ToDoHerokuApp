@@ -7,7 +7,7 @@ import com.mashape.interview.ToDoHerokuApp.domains.Item;
 public class ToDoListDaoMongoImplementation implements ToDoListDao {
 
 	@Override
-	public Set<Item> getAllItems() {
+	public String getAllItems() {
 		// TODO Auto-generated method stub
 		return null;
 	}

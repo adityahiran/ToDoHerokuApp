@@ -42,7 +42,7 @@ public class ToDoItems {
 	// Get all the items in the to-do list -SUCCESS
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Set<Item> getAllItems() {
+    public String getAllItems() {
         return toDoService.getAllItems();
     }
     

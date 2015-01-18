@@ -26,9 +26,10 @@ public class ToDoService {
 		return instance;
 	}
 	
-	public Set<Item> getAllItems() {
-		Set<Item> allItems = dao.getAllItems();
-		return allItems;
+	public String getAllItems() {
+		//Set<Item> allItems = 
+			return	dao.getAllItems();
+		//return allItems;
 	}
 
 	public Item getItemById(long id) {

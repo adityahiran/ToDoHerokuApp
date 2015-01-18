@@ -8,7 +8,7 @@ import java.util.Set;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
 
-public class ToDoListDaoImplementation implements ToDoListDao {
+public class ToDoListDaoImplementation {
 
 	private static ToDoListDaoImplementation instance = null;
 	private static ToDoList toDoList = ToDoList.getInstance();
@@ -84,22 +84,22 @@ public class ToDoListDaoImplementation implements ToDoListDao {
 		return ToDoList.deleteItemByTitle(title);
 	}
 
-	@Override
+	//@Override
 	public Set<Item> deleteAllItems() {
 		return ToDoList.deleteAllItems();
 	}
 
-	@Override
+	//@Override
 	public Item updateItem(String oldTitle, String newTitle, String newBody) {
 		return ToDoList.updateItem(oldTitle, newTitle, newBody);
 	}
 
-	@Override
+	//@Override
 	public Item markItemAsDone(String title) {
 		return ToDoList.markItemAsDone(title);
 	}
 
-	@Override
+	//@Override
 	public Item getLastItem() {
 		return ToDoList.getLastItem();
 	}

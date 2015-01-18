@@ -19,6 +19,7 @@ import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDaoImplementation;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.factories.JestFactory;
 import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
+import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoListMongo;
 import com.mashape.interview.ToDoHerokuApp.observable.IObservable;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
 
@@ -37,7 +38,7 @@ import io.searchbox.indices.IndicesExists;
 public class SearchService implements IObserver {
 
 	private static SearchService instance = null;
-	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance();
+	private static ToDoListDao dao = ToDoListMongo.getInstance(); //ToDoListDaoImplementation.getInstance();
 	private static JestClient jestClient = JestFactory.getJestClient();
 	private static boolean initialized = false;
 
@@ -74,12 +75,12 @@ public class SearchService implements IObserver {
 	}
 	
 	private static void addDataToBeIndexed() {
-		Set<Item> allItems = dao.getAllItems();
+		/*Set<Item> allItems = dao.getAllItems();
 		Iterator<Item> iterator = allItems.iterator();
 		while(iterator.hasNext()) {
 			Item next = iterator.next();
 			indexAnItem(next);
-		}
+		}*/
 	}
 	
 	public static void indexAnItem(Item source) {
