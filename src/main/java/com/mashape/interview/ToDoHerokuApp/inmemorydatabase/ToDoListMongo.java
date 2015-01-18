@@ -46,15 +46,14 @@ public class ToDoListMongo implements ToDoListDao {
 		Iterator<DBObject> iterator = allItems.iterator();
 		while(iterator.hasNext()) {
 			DBObject next = iterator.next();
-			
-			long id = Long.parseLong(next.get("id").toString());
-			String title = next.get("title").toString();
-			String body = next.get("body").toString();
-			boolean done = Boolean.parseBoolean(next.get("done").toString());
+			long id = Long.parseLong((String)next.get("id"));
+			String title = (String)next.get("title");
+			String body = (String)next.get("body");
+			boolean done = Boolean.parseBoolean((String)next.get("done"));
 			
 			Item item = new Item(id, title, body, done);
 			items.add(item);
-			ret = next.get(title).toString();
+			ret = title;
 		}
 		return ret;
 	}
