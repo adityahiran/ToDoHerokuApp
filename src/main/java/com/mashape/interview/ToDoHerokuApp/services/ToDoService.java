@@ -13,7 +13,7 @@ import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoListMongo;
 
 public class ToDoService {
 
-	private static ToDoListDao dao = ToDoListMongo.getInstance(); //ToDoListDaoImplementation.getInstance();
+	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance(); //ToDoListMongo.getInstance();
 	
 	private static ToDoService instance = null;
 	

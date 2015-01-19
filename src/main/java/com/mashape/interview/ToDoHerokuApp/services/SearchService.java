@@ -38,7 +38,7 @@ import io.searchbox.indices.IndicesExists;
 public class SearchService implements IObserver {
 
 	private static SearchService instance = null;
-	private static ToDoListDao dao = ToDoListMongo.getInstance(); //ToDoListDaoImplementation.getInstance();
+	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance(); //ToDoListMongo.getInstance(); 
 	private static JestClient jestClient = JestFactory.getJestClient();
 	private static boolean initialized = false;
 

@@ -8,7 +8,7 @@ import java.util.Set;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
 
-public class ToDoListDaoImplementation {
+public class ToDoListDaoImplementation implements ToDoListDao {
 
 	private static ToDoListDaoImplementation instance = null;
 	private static ToDoList toDoList = ToDoList.getInstance();

@@ -63,8 +63,6 @@ public class TwilioStrategy implements INotifyStrategy {
 		Client client = ClientBuilder.newClient();
 		String url = "https://api.twilio.com/2010-04-01/Accounts/AC712fe2e4e8f5620f46d435a6dae8ab3e/Messages.json";
 		
-		
-		
 		HttpAuthenticationFeature feature = HttpAuthenticationFeature.basicBuilder().credentials("AC712fe2e4e8f5620f46d435a6dae8ab3e", "e5f01f52d8d37dbb142366a095819875").build();
 		client.register(feature);
 		
@@ -78,7 +76,6 @@ public class TwilioStrategy implements INotifyStrategy {
 		
 		// Step3
 		Response response = target.request().post(Entity.form(postForm));
-		
 		
 		if((response.getStatus() == 200) || (response.getStatus() == 201)) return true;
 		return false;
