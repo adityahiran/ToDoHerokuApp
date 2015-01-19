@@ -29,6 +29,7 @@ public class ToDoFacade {
 		return instance;
 	}
 
+	// GET: https://todo-app-mashape.herokuapp.com/todo-list-items - WORKING
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAllItems() {
@@ -40,8 +41,9 @@ public class ToDoFacade {
 	@GET
 	@Path("{title}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Item getItemByTitle(@PathParam("title") String title) {
-		return toDoWrapper.getItemByTitle(title);
+	public Response getItemByTitle(@PathParam("title") String title) {
+		Item item = toDoWrapper.getItemByTitle(title); 
+		return Response.ok(item).build();
 	}
 
 	// Get all the completed todo list items - SUCCESS
