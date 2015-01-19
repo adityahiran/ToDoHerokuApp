@@ -72,7 +72,7 @@ public class TwilioStrategy implements INotifyStrategy {
 				
 		MultivaluedHashMap<String, String> postForm = new MultivaluedHashMap<String, String>();
 		postForm.add("From", "+19164321120");
-		postForm.add("To", "+19168137782");
+		postForm.add("To", "+19167698514");
 		postForm.add("Body", "Hello body");
 		
 		// Step3
