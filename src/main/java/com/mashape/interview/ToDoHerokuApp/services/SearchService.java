@@ -170,6 +170,8 @@ public class SearchService implements IObserver {
 
 	public Set<Item> searchItems(String param) {
 		try {
+			createElasticSearchIndex();
+			
 			// Search in the title first
 			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 			searchSourceBuilder.query(QueryBuilders.matchQuery("title", param));
