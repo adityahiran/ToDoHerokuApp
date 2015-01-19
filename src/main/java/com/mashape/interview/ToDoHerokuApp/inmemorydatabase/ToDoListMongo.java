@@ -40,10 +40,10 @@ public class ToDoListMongo implements ToDoListDao {
 	public Set<Item> getAllItems() {
 		String ret="";
 		Set<Item> items = new HashSet<Item>();
-		/*DB db = client.getDB(ToDoAppConstants.getDbName());
+		DB db = client.getDB(ToDoAppConstants.getDbName());
 		DBCollection dbCollection = db.getCollection(ToDoAppConstants.getCollectionName());
 		DBCursor allItems = dbCollection.find(new BasicDBObject(), new BasicDBObject("title",1).append("_id", 0));
-		try {
+		/*try {
 			while(allItems.hasNext()) {
 				BasicDBObject next = (BasicDBObject) allItems.next();
 				
