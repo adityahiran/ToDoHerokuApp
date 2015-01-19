@@ -95,7 +95,7 @@ public class ToDoFacade {
 	}
 
 	// HTTP REQUEST METHOD: PUT
-	/*@PUT
+	@PUT
 	@Path("{old-title}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -104,7 +104,7 @@ public class ToDoFacade {
 			@FormParam("new-body") String newBody) {
 		Item item = toDoWrapper.updateItem(oldTitle, newTitle, newBody);
 		return Response.ok(item).build();
-	}*/
+	}
 
 	// Mark a todo list item as done
 	@PUT
