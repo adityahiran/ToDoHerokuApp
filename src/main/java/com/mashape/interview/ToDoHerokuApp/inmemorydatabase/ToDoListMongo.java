@@ -1,5 +1,6 @@
 package com.mashape.interview.ToDoHerokuApp.inmemorydatabase;
 
+import java.net.UnknownHostException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
@@ -60,7 +61,7 @@ public class ToDoListMongo implements ToDoListDao {
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			Item item = new Item(2L,"title1",e.getMessage(),false);
+			Item item = new Item(2L,"title1",e.toString(),false);
 			items.add(item);
 			return items;
 		}
