@@ -60,7 +60,8 @@ public class ToDoListMongo implements ToDoListDao {
 		} finally {
 			allItems.close();
 		}
-		
+		Item item = new Item(1,"title1","body1",false);
+		items.add(item);
 		return items;
 	}
 
