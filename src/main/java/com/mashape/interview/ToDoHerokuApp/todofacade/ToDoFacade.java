@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -46,7 +48,7 @@ public class ToDoFacade {
 		return Response.ok(item).build();
 	}
 
-	// Get all the completed todo list items - SUCCESS
+	// Get all the completed todo list items - WORKING
 	@GET
 	@Path("done")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -55,7 +57,7 @@ public class ToDoFacade {
 		return Response.ok(completedItems).build();
 	}
 
-	// Get all the todo list items that are yet to be completed - SUCCESS
+	// Get all the todo list items that are yet to be completed - WORKING
 	@GET
 	@Path("undone")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -64,6 +66,7 @@ public class ToDoFacade {
 		return Response.ok(itemsYetToComplete).build();
 	}
 
+	// Search the todo-list-items stored in the database by a search term that should match either partly or fully the contents in the item's title/body - WORKING 
 	@GET
 	@Path("search/{searchTerm}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -72,12 +75,14 @@ public class ToDoFacade {
 		return Response.ok(items).build();
 	}
 
+	// Save a new todo-list-item
 	@POST
-	@Path("{title}/{body}")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public Item saveItemByTitle(@NotNull @PathParam("title") String title,
-			@PathParam("body") String body) {
-		return toDoWrapper.saveItemByTitle(title, body);
+	public Response saveItemByTitle(@NotNull @FormParam("title") String title,
+			@FormParam("body") String body) {
+		Item item = toDoWrapper.saveItemByTitle(title, body);
+		return Response.ok(item).build();
 	}
 
 	@DELETE
