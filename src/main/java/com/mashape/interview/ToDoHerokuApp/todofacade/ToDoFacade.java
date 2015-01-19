@@ -12,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 
@@ -30,8 +31,9 @@ public class ToDoFacade {
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Set<Item> getAllItems() {
-		return toDoWrapper.getAllItems();
+	public Response getAllItems() {
+		Set<Item> allItems = toDoWrapper.getAllItems(); 
+		return Response.ok(allItems).build();
 	}
 
 	// Get the item with the specified title in the to-do list - SUCCESS
