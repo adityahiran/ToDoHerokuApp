@@ -170,6 +170,7 @@ public class SearchService implements IObserver {
 
 	public Set<Item> searchItems(String param) {
 		try {
+			/* This call makes sure the indices are in sync even if the index on the elastic search is deleted while the database has other items that are not added to the index.*/
 			createElasticSearchIndex();
 			
 			// Search in the title first
