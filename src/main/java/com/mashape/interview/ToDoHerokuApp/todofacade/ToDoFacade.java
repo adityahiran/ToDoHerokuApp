@@ -96,12 +96,14 @@ public class ToDoFacade {
 
 	// HTTP REQUEST METHOD: PUT
 	@PUT
-	@Path("{old-title}/{new-title}/{new-body}")
+	@Path("{old-title}")
+	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
-	public void updateItem(@NotNull @PathParam("old-title") String oldTitle,
-			@NotNull @PathParam("new-title") String newTitle,
-			@PathParam("new-body") String newBody) {
-		toDoWrapper.updateItem(oldTitle, newTitle, newBody);
+	public Response updateItem(@NotNull @PathParam("old-title") String oldTitle,
+			@NotNull @FormParam("new-title") String newTitle,
+			@FormParam("new-body") String newBody) {
+		Item item = toDoWrapper.updateItem(oldTitle, newTitle, newBody);
+		return Response.ok(item).build();
 	}
 
 	// Mark a todo list item as done

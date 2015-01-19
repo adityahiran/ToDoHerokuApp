@@ -51,8 +51,8 @@ class ToDoWrapper {
     	return toDoService.deleteItemByTitle(title);
     }
     
-    public void updateItem(String oldTitle, String newTitle,  String newBody) {
-    	toDoService.updateItem(oldTitle, newTitle, newBody);
+    public Item updateItem(String oldTitle, String newTitle,  String newBody) {
+    	return toDoService.updateItem(oldTitle, newTitle, newBody);
     }
     
     public Item markItemAsDone(String title) {

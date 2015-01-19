@@ -61,8 +61,8 @@ public class ToDoService {
 		return dao.deleteAllItems();
 	}
 
-	public void updateItem(String oldTitle, String newTitle, String newBody) {
-		dao.updateItem(oldTitle, newTitle, newBody);
+	public Item updateItem(String oldTitle, String newTitle, String newBody) {
+		return dao.updateItem(oldTitle, newTitle, newBody);
 	}
 
 	public Item markItemAsDone(String title) {
