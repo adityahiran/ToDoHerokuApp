@@ -40,14 +40,14 @@ public class ToDoListMongo implements ToDoListDao {
 	public Set<Item> getAllItems() {
 		String ret="";
 		Set<Item> items = new HashSet<Item>();
-		DB db = client.getDB(ToDoAppConstants.getDbName());
+		/*DB db = client.getDB(ToDoAppConstants.getDbName());
 		DBCollection dbCollection = db.getCollection(ToDoAppConstants.getCollectionName());
 		DBCursor allItems = dbCollection.find(new BasicDBObject(), new BasicDBObject("title",1).append("_id", 0));
 		try {
 			while(allItems.hasNext()) {
 				BasicDBObject next = (BasicDBObject) allItems.next();
 				
-				/*String idString = next.getString("id");
+				String idString = next.getString("id");
 				long id = Long.parseLong(idString);
 				String title = next.getString("title");
 				String body = next.getString("body");
@@ -55,12 +55,12 @@ public class ToDoListMongo implements ToDoListDao {
 				boolean done = Boolean.parseBoolean(doneString);
 				
 				Item item = new Item(id,title,body,done);
-				items.add(item);*/
+				items.add(item);
 			}
 		} finally {
 			allItems.close();
-		}
-		Item item = new Item(1,"title1","body1",false);
+		}*/
+		Item item = new Item(1L,"title1","body1",false);
 		items.add(item);
 		return items;
 	}
