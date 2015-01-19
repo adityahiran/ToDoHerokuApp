@@ -75,7 +75,7 @@ public class ToDoFacade {
 		return Response.ok(items).build();
 	}
 
-	// Save a new todo-list-item
+	// Save a new todo-list-item - WORKING
 	@POST
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
@@ -88,8 +88,9 @@ public class ToDoFacade {
 	@DELETE
 	@Path("/{title}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Item deleteItemByTitle(@NotNull @PathParam("title") String title) {
-		return toDoWrapper.deleteItemByTitle(title);
+	public Response deleteItemByTitle(@NotNull @PathParam("title") String title) {
+		Item item = toDoWrapper.deleteItemByTitle(title);
+		return Response.ok(item).build();
 	}
 
 	// HTTP REQUEST METHOD: PUT
