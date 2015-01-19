@@ -77,12 +77,12 @@ public class SearchService implements IObserver {
 	}
 	
 	private static void addDataToBeIndexed() {
-		/*Set<Item> allItems = dao.getAllItems();
+		Set<Item> allItems = dao.getAllItems();
 		Iterator<Item> iterator = allItems.iterator();
 		while(iterator.hasNext()) {
 			Item next = iterator.next();
 			indexAnItem(next);
-		}*/
+		}
 	}
 	
 	public static void indexAnItem(Item source) {
