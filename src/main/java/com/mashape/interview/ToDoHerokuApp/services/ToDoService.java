@@ -26,7 +26,7 @@ public class ToDoService {
 		return instance;
 	}
 	
-	public String getAllItems() {
+	public Set<Item> getAllItems() {
 		//Set<Item> allItems = 
 			return	dao.getAllItems();
 		//return allItems;

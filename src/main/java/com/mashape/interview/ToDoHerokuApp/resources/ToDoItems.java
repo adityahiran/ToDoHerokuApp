@@ -45,10 +45,8 @@ public class ToDoItems {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllItems() {
-    	//String s = toDoService.getAllItems();
-    	//Object json = JSON.parse("title");
-    	String json = "{\"title\":\"value1\"}";
-    	return Response.ok(json).build();//toDoService.getAllItems();
+    	Set<Item> s = toDoService.getAllItems();
+    	return Response.ok(s).build();//toDoService.getAllItems();
     }
     
     // Get the item with the specified id in the to-do list

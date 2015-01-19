@@ -37,7 +37,7 @@ public class ToDoListMongo implements ToDoListDao {
 	   }
 
 	@Override
-	public String getAllItems() {
+	public Set<Item> getAllItems() {
 		String ret="";
 		Set<Item> items = new HashSet<Item>();
 		DB db = client.getDB(ToDoAppConstants.getDbName());
@@ -45,14 +45,23 @@ public class ToDoListMongo implements ToDoListDao {
 		DBCursor allItems = dbCollection.find(new BasicDBObject(), new BasicDBObject("title",1).append("_id", 0));
 		try {
 			while(allItems.hasNext()) {
-				DBObject next = allItems.next();
-				ret = (String) next.get("title");
+				BasicDBObject next = (BasicDBObject) allItems.next();
+				
+				String idString = next.getString("id");
+				long id = Long.parseLong(idString);
+				String title = next.getString("title");
+				String body = next.getString("body");
+				String doneString = next.getString("done");
+				boolean done = Boolean.parseBoolean(doneString);
+				
+				Item item = new Item(id,title,body,done);
+				items.add(item);
 			}
 		} finally {
 			allItems.close();
 		}
 		
-		return ret;
+		return items;
 	}
 
 	@Override

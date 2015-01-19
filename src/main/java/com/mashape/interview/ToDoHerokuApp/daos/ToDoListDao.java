@@ -8,7 +8,7 @@ import com.mashape.interview.ToDoHerokuApp.domains.Item;
 
 public interface ToDoListDao {
 
-	public String getAllItems();
+	public Set<Item> getAllItems();
 	
 	public Item getItemById(long id);
 	
