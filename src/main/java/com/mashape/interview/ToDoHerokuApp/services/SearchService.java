@@ -43,6 +43,7 @@ public class SearchService implements IObserver {
 	private static JestClient jestClient = JestFactory.getJestClient();
 	private static boolean initialized = false;
 
+	// The search index in elastic search is created during the creation of this class's instance
 	public static SearchService getInstance() {
 		if (instance == null) {
 			instance = new SearchService();
