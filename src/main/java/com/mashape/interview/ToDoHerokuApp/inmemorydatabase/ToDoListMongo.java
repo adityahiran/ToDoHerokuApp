@@ -47,7 +47,7 @@ public class ToDoListMongo implements ToDoListDao {
 			while(allItems.hasNext()) {
 				BasicDBObject next = (BasicDBObject) allItems.next();
 				
-				String idString = next.getString("id");
+				/*String idString = next.getString("id");
 				long id = Long.parseLong(idString);
 				String title = next.getString("title");
 				String body = next.getString("body");
@@ -55,7 +55,7 @@ public class ToDoListMongo implements ToDoListDao {
 				boolean done = Boolean.parseBoolean(doneString);
 				
 				Item item = new Item(id,title,body,done);
-				items.add(item);
+				items.add(item);*/
 			}
 		} finally {
 			allItems.close();
