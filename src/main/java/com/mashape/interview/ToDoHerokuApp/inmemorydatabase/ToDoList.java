@@ -104,6 +104,7 @@ public class ToDoList implements IObservable {
 				break;
 			}
 		}
+		setChanged(true, 2, ret);
 		return ret;
 	}
 	
@@ -124,7 +125,6 @@ public class ToDoList implements IObservable {
 		
 		// Notify the observers about this change
 		setChanged(true, 4, ret);
-		//notifyService.update(ret, 4);
 		return ret;
 	}
 	
