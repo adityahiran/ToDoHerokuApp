@@ -16,9 +16,11 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.fasterxml.jackson.core.JsonFactory;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.services.SearchService;
 import com.mashape.interview.ToDoHerokuApp.services.ToDoService;
+import com.mongodb.util.JSON;
 
 /**
  * Root resource (exposed at "todoitems" path)
@@ -43,7 +45,9 @@ public class ToDoItems {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getAllItems() {
-    	return Response.ok(toDoService.getAllItems()).build();//toDoService.getAllItems();
+    	String s = toDoService.getAllItems();
+    	Object json = JSON.parse(s);
+    	return Response.ok(json).build();//toDoService.getAllItems();
     }
     
     // Get the item with the specified id in the to-do list
