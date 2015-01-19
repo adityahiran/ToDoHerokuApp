@@ -71,7 +71,7 @@ public class ToDoFacade {
 	@Path("search/{searchTerm}")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response searchItem(@PathParam("searchTerm") String searchTerm) {
-		List<Item> items = toDoWrapper.searchItem(searchTerm);
+		Set<Item> items = toDoWrapper.searchItem(searchTerm);
 		return Response.ok(items).build();
 	}
 

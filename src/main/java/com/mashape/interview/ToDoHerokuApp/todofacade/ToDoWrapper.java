@@ -39,7 +39,7 @@ class ToDoWrapper {
     	return toDoService.getItemsByStatus(status);
     }
     
-    public List<Item> searchItem(String searchTerm) {
+    public Set<Item> searchItem(String searchTerm) {
     	return searchService.searchItems(searchTerm);
     }
     

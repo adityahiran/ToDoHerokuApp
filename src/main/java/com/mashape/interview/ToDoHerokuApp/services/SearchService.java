@@ -2,6 +2,7 @@ package com.mashape.interview.ToDoHerokuApp.services;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -166,7 +167,7 @@ public class SearchService implements IObserver {
 
 	}*/
 
-	public List<Item> searchItems(String param) {
+	public Set<Item> searchItems(String param) {
 		try {
 			
 			// Search in the title first
@@ -188,7 +189,8 @@ public class SearchService implements IObserver {
 			List<Item> items = new ArrayList<Item>();
 			items.addAll(searchInTitleResultList);
 			items.addAll(searchInBodyResultList);
-			return items;
+			Set<Item> itemsSet = new HashSet(items);
+			return itemsSet;
 
 		} catch (IOException e) {
 			e.printStackTrace();

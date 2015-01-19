@@ -96,7 +96,7 @@ public class ToDoItems {
     @GET
     @Path("search/{searchTerm}")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Item> searchItem(@PathParam("searchTerm") String searchTerm) {
+    public Set<Item> searchItem(@PathParam("searchTerm") String searchTerm) {
     	return searchService.searchItems(searchTerm);
     }
     
