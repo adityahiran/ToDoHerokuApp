@@ -100,7 +100,7 @@ public class ToDoFacade {
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response updateItem(@NotNull @PathParam("old-title") String oldTitle,
-			@NotNull @FormParam("new-title") String newTitle,
+			@NotNull@FormParam("new-title") String newTitle,
 			@FormParam("new-body") String newBody) {
 		Item item = toDoWrapper.updateItem(oldTitle, newTitle, newBody);
 		return Response.ok(item).build();
