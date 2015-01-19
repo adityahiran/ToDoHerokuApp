@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @XmlRootElement
 public class Item {
 
+	@JsonIgnore
 	@JestId
 	private long id;
 	private String title;
