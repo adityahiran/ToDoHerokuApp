@@ -37,7 +37,7 @@ public class ToDoFacade {
 		return Response.ok(allItems).build();
 	}
 
-	// Get the item with the specified title in the to-do list - SUCCESS
+	// Get the item with the specified title in the to-do list - WORKING
 	@GET
 	@Path("{title}")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -50,23 +50,26 @@ public class ToDoFacade {
 	@GET
 	@Path("done")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Set<Item> getCompletedItems() {
-		return toDoWrapper.getCompletedItems();
+	public Response getCompletedItems() {
+		Set<Item> completedItems = toDoWrapper.getCompletedItems();
+		return Response.ok(completedItems).build();
 	}
 
 	// Get all the todo list items that are yet to be completed - SUCCESS
 	@GET
 	@Path("undone")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Set<Item> getItemsYetToComplete() {
-		return toDoWrapper.getItemsYetToComplete();
+	public Response getItemsYetToComplete() {
+		Set<Item> itemsYetToComplete = toDoWrapper.getItemsYetToComplete();
+		return Response.ok(itemsYetToComplete).build();
 	}
 
 	@GET
 	@Path("search/{searchTerm}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public List<Item> searchItem(@PathParam("searchTerm") String searchTerm) {
-		return toDoWrapper.searchItem(searchTerm);
+	public Response searchItem(@PathParam("searchTerm") String searchTerm) {
+		List<Item> items = toDoWrapper.searchItem(searchTerm);
+		return Response.ok(items).build();
 	}
 
 	@POST
