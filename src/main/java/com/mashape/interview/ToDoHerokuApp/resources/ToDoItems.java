@@ -42,8 +42,8 @@ public class ToDoItems {
 	// Get all the items in the to-do list -SUCCESS
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public String getAllItems() {
-        return toDoService.getAllItems();
+    public Response getAllItems() {
+    	return Response.ok(toDoService.getAllItems()).build();//toDoService.getAllItems();
     }
     
     // Get the item with the specified id in the to-do list

@@ -7,6 +7,7 @@ import java.util.Set;
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.utilities.ToDoAppConstants;
+import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
@@ -37,28 +38,20 @@ public class ToDoListMongo implements ToDoListDao {
 
 	@Override
 	public String getAllItems() {
-//TODO
 		String ret="";
 		Set<Item> items = new HashSet<Item>();
 		DB db = client.getDB(ToDoAppConstants.getDbName());
 		DBCollection dbCollection = db.getCollection(ToDoAppConstants.getCollectionName());
-		//DBCursor allItems = dbCollection.find();
+		DBCursor allItems = dbCollection.find(new BasicDBObject(), new BasicDBObject("title",1).append("_id", 0));
+		try {
+			while(allItems.hasNext()) {
+				DBObject next = allItems.next();
+				ret = (String) next.get("title");
+			}
+		} finally {
+			allItems.close();
+		}
 		
-		DBObject findOne = dbCollection.findOne();
-		ret = (String) findOne.get("title");
-		//Iterator<DBObject> iterator = allItems.iterator();
-		/*while(allItems.hasNext()) {
-			DBObject next = allItems.next();
-			long id = Long.parseLong((String)next.get("id"));
-			String title = (String)next.get("title");
-			String body = (String)next.get("body");
-			boolean done = Boolean.parseBoolean((String)next.get("done"));
-			
-			Item item = new Item(id, title, body, done);
-			items.add(item);
-			String title = (String) next.get("title");
-			ret = title;
-		}*/
 		return ret;
 	}
 
