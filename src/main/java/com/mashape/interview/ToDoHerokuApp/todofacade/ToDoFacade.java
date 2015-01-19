@@ -85,6 +85,7 @@ public class ToDoFacade {
 		return Response.ok(item).build();
 	}
 
+	// Delete a todo-list-item by providing the title as a path parameter - WORKING
 	@DELETE
 	@Path("/{title}")
 	@Produces(MediaType.APPLICATION_JSON)
