@@ -66,6 +66,7 @@ public class ToDoListMongo implements ToDoListDao {
 		}
 		finally {
 			allItems.close();
+			client.close();
 		}
 		Item item = new Item(1L,"title1","body1",false);
 		items.add(item);
