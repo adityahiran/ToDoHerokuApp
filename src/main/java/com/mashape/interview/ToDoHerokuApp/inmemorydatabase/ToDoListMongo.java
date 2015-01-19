@@ -60,7 +60,7 @@ public class ToDoListMongo implements ToDoListDao {
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
-			Item item = new Item(2L,"title1","body1",false);
+			Item item = new Item(2L,"title1",e.getMessage(),false);
 			items.add(item);
 			return items;
 		}
