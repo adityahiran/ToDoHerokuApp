@@ -4,5 +4,5 @@ import com.mashape.interview.ToDoHerokuApp.domains.Item;
 
 public interface INotifyStrategy {
 
-	public boolean sendNotification(Item item);
+	public String sendNotification(Item item);
 }

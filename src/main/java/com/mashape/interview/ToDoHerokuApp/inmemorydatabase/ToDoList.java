@@ -108,7 +108,7 @@ public class ToDoList implements IObservable {
 		return ret;
 	}
 	
-	public static Item markItemAsDone(String title) {
+	public static String markItemAsDone(String title) {
 		Item ret = null;
 		Set<Long> keySet = inMemoryDatabase.keySet();
 		Iterator<Long> iterator = keySet.iterator();
@@ -124,8 +124,7 @@ public class ToDoList implements IObservable {
 		}
 		
 		// Notify the observers about this change
-		setChanged(true, 4, ret);
-		return ret;
+		return setChanged(true, 4, ret);
 	}
 	
 	private static void initData() {
@@ -158,19 +157,21 @@ public class ToDoList implements IObservable {
 		return changed;
 	}
 
-	public static void setChanged(boolean hasChanged, int operation, Item lastModifiedItem) {
+	public static String setChanged(boolean hasChanged, int operation, Item lastModifiedItem) {
 		ToDoList.changed = hasChanged;
-		instance.notifyObservers(operation, lastModifiedItem);
+		return instance.notifyObservers(operation, lastModifiedItem);
 	}
 	
 	@Override
-	public void notifyObservers(int invokingOperation, Item lastModifiedItem) {
+	public String notifyObservers(int invokingOperation, Item lastModifiedItem) {
+		String ret = "";
 		Iterator<IObserver> iter = observers.iterator();
 		while(iter.hasNext()) {
 			IObserver observer = iter.next();
-			observer.update(lastModifiedItem, invokingOperation);
+			ret = observer.update(lastModifiedItem, invokingOperation);
 		}
 		changed = false;
+		return ret;
 	}
 
 	public static Item getLastItem() {

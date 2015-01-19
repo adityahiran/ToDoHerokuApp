@@ -57,7 +57,7 @@ public class TwilioStrategy implements INotifyStrategy {
 	}*/
 	
 	@Override
-	public boolean sendNotification(Item lastModiefiedItem) {
+	public String sendNotification(Item lastModiefiedItem) {
 		
 		// Step1
 		Client client = ClientBuilder.newClient();
@@ -77,7 +77,7 @@ public class TwilioStrategy implements INotifyStrategy {
 		// Step3
 		Response response = target.request().post(Entity.form(postForm));
 		
-		if((response.getStatus() == 200) || (response.getStatus() == 201)) return true;
-		return false;
+		if((response.getStatus() == 200) || (response.getStatus() == 201)) return response.toString();
+		return "Error sending the notification";
 	}
 }

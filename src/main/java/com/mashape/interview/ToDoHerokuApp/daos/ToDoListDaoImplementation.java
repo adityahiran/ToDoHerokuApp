@@ -95,7 +95,7 @@ public class ToDoListDaoImplementation implements ToDoListDao {
 	}
 
 	//@Override
-	public Item markItemAsDone(String title) {
+	public String markItemAsDone(String title) {
 		return ToDoList.markItemAsDone(title);
 	}
 

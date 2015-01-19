@@ -135,7 +135,7 @@ public class ToDoListMongo implements ToDoListDao {
 	}
 
 	@Override
-	public Item markItemAsDone(String title) {
+	public String markItemAsDone(String title) {
 		// TODO Auto-generated method stub
 		return null;
 	}

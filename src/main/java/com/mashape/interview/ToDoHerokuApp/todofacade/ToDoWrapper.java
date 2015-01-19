@@ -55,7 +55,7 @@ class ToDoWrapper {
     	return toDoService.updateItem(oldTitle, newTitle, newBody);
     }
     
-    public Item markItemAsDone(String title) {
+    public String markItemAsDone(String title) {
     	return toDoService.markItemAsDone(title);
     }
 }

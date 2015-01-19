@@ -94,7 +94,7 @@ public class ToDoFacade {
 		return Response.ok(item).build();
 	}
 
-	// HTTP REQUEST METHOD: PUT
+	// HTTP REQUEST METHOD: PUT - WORKING
 	@PUT
 	@Path("{old-title}")
 	@Consumes(MediaType.APPLICATION_FORM_URLENCODED)
@@ -110,7 +110,8 @@ public class ToDoFacade {
 	@PUT
 	@Path("{title}/mark-as-done")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Item markItemAsDone(@NotNull @PathParam("title") String title) {
-		return toDoWrapper.markItemAsDone(title);
+	public Response markItemAsDone(@NotNull @PathParam("title") String title) {
+		String item = toDoWrapper.markItemAsDone(title);
+		return Response.ok(item).build();
 	}
 }
