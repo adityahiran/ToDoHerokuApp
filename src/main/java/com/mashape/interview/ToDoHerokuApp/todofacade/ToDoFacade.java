@@ -1,5 +1,7 @@
 package com.mashape.interview.ToDoHerokuApp.todofacade;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
@@ -14,6 +16,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+
+import org.apache.http.client.utils.URIBuilder;
 
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 
@@ -81,7 +85,13 @@ public class ToDoFacade {
 	public Response saveItemByTitle(@NotNull @FormParam("title") String title,
 			@FormParam("body") String body) {
 		Item item = toDoWrapper.saveItemByTitle(title, body);
-		return Response.ok(item).build();
+		URI uri = null;
+		try {
+			uri = new URI("https://todo-app-mashape.herokuapp.com/todo-list-items/"+item.getTitle());
+		} catch (URISyntaxException e) {
+			e.printStackTrace();
+		}
+		return Response.created(uri).build();
 	}
 
 	// Delete a todo-list-item by providing the title as a path parameter - WORKING
