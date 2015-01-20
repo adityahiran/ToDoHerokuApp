@@ -1,7 +1,7 @@
 package com.mashape.interview.ToDoHerokuApp.services;
 
+import com.mashape.interview.ToDoHerokuApp.databases.ToDoList;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
-import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
 import com.mashape.interview.ToDoHerokuApp.strategies.INotifyStrategy;
 import com.mashape.interview.ToDoHerokuApp.strategies.TwilioStrategy;

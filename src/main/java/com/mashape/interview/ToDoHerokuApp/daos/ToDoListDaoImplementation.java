@@ -5,8 +5,8 @@ import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
 
+import com.mashape.interview.ToDoHerokuApp.databases.ToDoList;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
-import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
 
 public class ToDoListDaoImplementation implements ToDoListDao {
 

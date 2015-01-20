@@ -7,9 +7,9 @@ import javax.inject.Inject;
 
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDaoImplementation;
+import com.mashape.interview.ToDoHerokuApp.databases.ToDoList;
+import com.mashape.interview.ToDoHerokuApp.databases.ToDoListMongo;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
-import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
-import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoListMongo;
 
 public class ToDoService {
 

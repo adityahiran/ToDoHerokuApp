@@ -17,10 +17,10 @@ import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDaoImplementation;
+import com.mashape.interview.ToDoHerokuApp.databases.ToDoList;
+import com.mashape.interview.ToDoHerokuApp.databases.ToDoListMongo;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.factories.JestFactory;
-import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoList;
-import com.mashape.interview.ToDoHerokuApp.inmemorydatabase.ToDoListMongo;
 import com.mashape.interview.ToDoHerokuApp.observable.IObservable;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
 
