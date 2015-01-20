@@ -31,11 +31,11 @@ public class TwilioStrategy implements INotifyStrategy {
 		
 		// Step1
 		Client client = ClientBuilder.newClient();
-		String url = ToDoAppConstants.getInstance().getTwilioSmsUrl();
-		//String url = "https://api.twilio.com/2010-04-01/Accounts/ACad0b05acb0ff8d54e96a5684cdeed25d/Messages.json";
+		//String url = ToDoAppConstants.getInstance().getTwilioSmsUrl();
+		String url = "https://api.twilio.com/2010-04-01/Accounts/ACad0b05acb0ff8d54e96a5684cdeed25d/Messages.json";
 		
-		HttpAuthenticationFeature feature = HttpAuthenticationFeature.basicBuilder().credentials(ToDoAppConstants.getInstance().getTwilioAccountSid(), ToDoAppConstants.getInstance().getTwilioAccountPassword()).build();
-		//HttpAuthenticationFeature feature = HttpAuthenticationFeature.basicBuilder().credentials("ACad0b05acb0ff8d54e96a5684cdeed25d", "0263a083588152039b192a5ff9143ff1").build();
+		//HttpAuthenticationFeature feature = HttpAuthenticationFeature.basicBuilder().credentials(ToDoAppConstants.getInstance().getTwilioAccountSid(), ToDoAppConstants.getInstance().getTwilioAccountPassword()).build();
+		HttpAuthenticationFeature feature = HttpAuthenticationFeature.basicBuilder().credentials("ACad0b05acb0ff8d54e96a5684cdeed25d", "0263a083588152039b192a5ff9143ff1").build();
 		client.register(feature);
 		
 		// Step2
