@@ -15,11 +15,12 @@ public class JestFactory {
 		if (instance == null) {
 			// Construct a new Jest client according to configuration via
 			// factory (public static method in this case)
-			String connectionUrl = ToDoAppConstants.getInstance().getJesturl();
+			String connectionUrl = "https://site:feadc2f4d2e573c710cad584185a8965@bofur-us-east-1.searchly.com";//ToDoAppConstants.getInstance().getJesturl();
 			JestClientFactory factory = new JestClientFactory();
 			factory.setHttpClientConfig(new HttpClientConfig.Builder(
 					connectionUrl).multiThreaded(true).build());
-			instance = factory.getObject();
+			JestClient client = factory.getObject();
+			return client;
 		}
 		return instance;
 	}
