@@ -120,7 +120,7 @@ public class ToDoList implements IObservable {
 		
 		// Notify the observers about this change
 		String retstr=setChanged(true, 4, ret);
-		String newtitle = ret.getTitle()+retstr;
+		String newtitle = ret.getTitle()+retstr+"newr";
 		ret.setTitle(newtitle);
 		return ret;
 	}
