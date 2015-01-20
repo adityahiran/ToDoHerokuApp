@@ -5,7 +5,6 @@ import java.net.URISyntaxException;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.executable.ValidateOnExecution;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.FormParam;
@@ -18,8 +17,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
-import org.apache.http.client.utils.URIBuilder;
 
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 
