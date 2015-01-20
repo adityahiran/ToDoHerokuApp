@@ -9,6 +9,7 @@ import java.util.Set;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.observable.IObservable;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
+import com.mashape.interview.ToDoHerokuApp.services.NotifyService;
 
 public class ToDoList implements IObservable {
 
@@ -18,6 +19,7 @@ public class ToDoList implements IObservable {
 	private static long lastIndex=0L;
 	private static ArrayList<IObserver> observers = new ArrayList<IObserver>();
 	private static boolean changed = false;
+	private static NotifyService notifyService = NotifyService.getInstance();
 	//operation = 1 for create; 2 for update; 3 for delete; 4 for marking-item-as-done
 	
 	protected ToDoList() {
