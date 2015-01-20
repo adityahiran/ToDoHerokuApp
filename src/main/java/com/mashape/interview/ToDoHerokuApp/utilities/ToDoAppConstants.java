@@ -14,7 +14,7 @@ public class ToDoAppConstants {
 	private static String TWILIO_ACCOUNT_PASSWORD = "0263a083588152039b192a5ff9143ff1";
 	private static final String TWILIO_FROM_NUMBER = "+19164321120";
 	private static final String TWILIO_TO_NUMBER = "+19168137782";
-	private static String TWILIO_SMS_URL = "https://api.twilio.com/2010-04-01/Accounts/"+ToDoAppConstants.getInstance().getTwilioAccountSid()+"/Messages.json";
+	private static String TWILIO_SMS_URL ="";// "https://api.twilio.com/2010-04-01/Accounts/"+ToDoAppConstants.getInstance().getTwilioAccountSid()+"/Messages.json";
 	private static Properties properties = null;
 	
 	public String getTwilioSmsUrl() {
@@ -57,7 +57,7 @@ public class ToDoAppConstants {
 		return DB_NAME;
 	}
 	
-	public void initData() {
+	/*public void initData() {
 		// Read from a properties file having all the values for the constants defined in this class.
 		try {
 			if(properties == null) {
@@ -74,5 +74,5 @@ public class ToDoAppConstants {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-	}
+	}*/
 }
