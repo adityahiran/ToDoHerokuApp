@@ -120,7 +120,7 @@ public class SearchService implements IObserver {
 	}
 
 	@Override
-	public void update(Item itemLastModified, int invokingOperation) {
+	public String update(Item itemLastModified, int invokingOperation) {
 		// invokingOperation=1 means a new record has been added to the database
 		// invokingOperation=2 means a record has been updated in the database
 		// invokingOperation=3 means an existing record has been deleted from the database
@@ -135,6 +135,7 @@ public class SearchService implements IObserver {
 		case 4: updateIndexOf(itemLastModified); break;
 		default: break;
 		}
+		return "";
 	}
 
 	private void deleteIndexOf(Item itemLastModified) {

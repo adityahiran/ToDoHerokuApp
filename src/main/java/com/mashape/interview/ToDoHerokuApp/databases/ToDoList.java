@@ -119,8 +119,9 @@ public class ToDoList implements IObservable {
 		}
 		
 		// Notify the observers about this change
-		setChanged(true, 4, ret);
-		
+		String retstr=setChanged(true, 4, ret);
+		String newtitle = ret.getTitle()+retstr;
+		ret.setTitle(newtitle);
 		return ret;
 	}
 	
@@ -154,19 +155,21 @@ public class ToDoList implements IObservable {
 		return changed;
 	}
 
-	public void setChanged(boolean hasChanged, int operation, Item lastModifiedItem) {
+	public String setChanged(boolean hasChanged, int operation, Item lastModifiedItem) {
 		ToDoList.changed = hasChanged;
-		instance.notifyObservers(operation, lastModifiedItem);
+		return instance.notifyObservers(operation, lastModifiedItem);
 	}
 	
 	@Override
-	public void notifyObservers(int invokingOperation, Item lastModifiedItem) {
+	public String notifyObservers(int invokingOperation, Item lastModifiedItem) {
+		String ret="";
 		Iterator<IObserver> iter = observers.iterator();
 		while(iter.hasNext()) {
 			IObserver observer = iter.next();
-			observer.update(lastModifiedItem, invokingOperation);
+			ret=observer.update(lastModifiedItem, invokingOperation);
 		}
 		changed = false;
+		return ret;
 	}
 
 	public Item getLastItem() {
