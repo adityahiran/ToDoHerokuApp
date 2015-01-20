@@ -39,9 +39,12 @@ public class TwilioStrategy implements INotifyStrategy {
 		WebTarget target = client.target(url);
 				
 		MultivaluedHashMap<String, String> postForm = new MultivaluedHashMap<String, String>();
-		postForm.add("From", ToDoAppConstants.getInstance().getTwilioFromNumber());
+		/*postForm.add("From", ToDoAppConstants.getInstance().getTwilioFromNumber());
 		postForm.add("To", ToDoAppConstants.getInstance().getTwilioToNumber());
-		postForm.add("Body", lastModiefiedItem.getTitle() + " has been marked as done on the todo list.");
+		postForm.add("Body", lastModiefiedItem.getTitle() + " has been marked as done on the todo list.");*/
+		postForm.add("From", "+19164321120");
+		postForm.add("To", "+19167698514");
+		postForm.add("Body", "Hello body");
 		
 		// Step3
 		Response r = target.request().post(Entity.form(postForm));
