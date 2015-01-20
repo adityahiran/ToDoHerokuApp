@@ -27,7 +27,9 @@ public class Main {
         // container. Setting parent loader priority to true changes this behavior.
         // Read more here: http://wiki.eclipse.org/Jetty/Reference/Jetty_Classloading
         root.setParentLoaderPriority(true);
-
+        
+        root.setWelcomeFiles(new String[]{ "index.html" });
+        
         final String webappDirLocation = "src/main/webapp/";
         root.setDescriptor(webappDirLocation + "/WEB-INF/web.xml");
         root.setResourceBase(webappDirLocation);
