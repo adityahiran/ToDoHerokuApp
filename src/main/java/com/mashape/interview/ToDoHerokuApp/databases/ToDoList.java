@@ -168,7 +168,7 @@ public class ToDoList implements IObservable {
 		Iterator<IObserver> iter = observers.iterator();
 		while(iter.hasNext()) {
 			IObserver observer = iter.next();
-			ret=observer.update(lastModifiedItem, invokingOperation);
+			ret+=observer.update(lastModifiedItem, invokingOperation);
 		}
 		changed = false;
 		return ret;
