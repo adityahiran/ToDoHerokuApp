@@ -129,11 +129,11 @@ public class ToDoList implements IObservable {
 	
 	private void initData() {
 		lastIndex=0L;
-		inMemoryDatabase.put(lastIndex, new Item(lastIndex, "title1", "body1", true));
+		inMemoryDatabase.put(lastIndex, new Item(lastIndex, "Complete the application given by Mashape", "It should be a restful web api using jersey.", true));
 		lastIndex= lastIndex + 1L;
-		inMemoryDatabase.put(lastIndex, new Item(lastIndex, "title2", "body2", false));
+		inMemoryDatabase.put(lastIndex, new Item(lastIndex, "Cook food for today", "Make something quick.", false));
 		lastIndex= lastIndex + 1L;
-		inMemoryDatabase.put(lastIndex, new Item(lastIndex, "title3", "body2 title1", false));
+		inMemoryDatabase.put(lastIndex, new Item(lastIndex, "Finish reading Outliers", "Have to complete it today.", false));
 	}
 	
 	 public static ToDoList getInstance() {
