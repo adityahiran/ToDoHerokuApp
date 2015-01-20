@@ -57,7 +57,7 @@ public class ToDoAppConstants {
 		return DB_NAME;
 	}
 	
-	public void initData() {
+	public static void initData() {
 		// Read from a properties file having all the values for the constants defined in this class.
 		try {
 			if(properties == null) {
