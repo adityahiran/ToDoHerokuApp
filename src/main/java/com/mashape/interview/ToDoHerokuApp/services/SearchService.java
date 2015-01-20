@@ -135,7 +135,7 @@ public class SearchService implements IObserver {
 		case 4: updateIndexOf(itemLastModified); break;
 		default: break;
 		}
-		return "";
+		return "SEARCH";
 	}
 
 	private void deleteIndexOf(Item itemLastModified) {
