@@ -91,7 +91,7 @@ public class ToDoFacade {
 		} catch (URISyntaxException e) {
 			e.printStackTrace();
 		}
-		return Response.created(uri).build();
+		return Response.created(uri).entity(item).build();
 	}
 
 	// Delete a todo-list-item by providing the title as a path parameter - WORKING
