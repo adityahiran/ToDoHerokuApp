@@ -10,11 +10,11 @@ public class ToDoAppConstants {
 	private static final String DB_NAME = "todo-db";
 	private static final String COLLECTION_NAME = "items";
 	private static final String JEST_URL= "https://site:feadc2f4d2e573c710cad584185a8965@bofur-us-east-1.searchly.com";
-	private static String TWILIO_ACCOUNT_SID = "ACad0b05acb0ff8d54e96a5684cdeed25d";
-	private static String TWILIO_ACCOUNT_PASSWORD = "0263a083588152039b192a5ff9143ff1";
+	private static String TWILIO_ACCOUNT_SID = null;//"ACad0b05acb0ff8d54e96a5684cdeed25d";
+	private static String TWILIO_ACCOUNT_PASSWORD = null;//"0263a083588152039b192a5ff9143ff1";
 	private static final String TWILIO_FROM_NUMBER = "+19164321120";
 	private static final String TWILIO_TO_NUMBER = "+19168137782";
-	private static String TWILIO_SMS_URL ="";// "https://api.twilio.com/2010-04-01/Accounts/"+ToDoAppConstants.getInstance().getTwilioAccountSid()+"/Messages.json";
+	private static String TWILIO_SMS_URL ="https://api.twilio.com/2010-04-01/Accounts/"+ToDoAppConstants.getInstance().getTwilioAccountSid()+"/Messages.json";
 	private static Properties properties = null;
 	
 	public String getTwilioSmsUrl() {
@@ -40,7 +40,7 @@ public class ToDoAppConstants {
 	public static ToDoAppConstants getInstance() {
 		if(instance == null) {
 			instance = new ToDoAppConstants();
-			//instance.initData();
+			instance.initData();
 		}
 		return instance;
 	}
@@ -57,7 +57,7 @@ public class ToDoAppConstants {
 		return DB_NAME;
 	}
 	
-	/*public void initData() {
+	public void initData() {
 		// Read from a properties file having all the values for the constants defined in this class.
 		try {
 			if(properties == null) {
@@ -74,5 +74,5 @@ public class ToDoAppConstants {
 		} catch(IOException e) {
 			e.printStackTrace();
 		}
-	}*/
+	}
 }
