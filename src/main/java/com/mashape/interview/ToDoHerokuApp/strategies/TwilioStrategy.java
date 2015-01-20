@@ -7,6 +7,7 @@ import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MultivaluedHashMap;
 import javax.ws.rs.core.Response;
 
+import com.mashape.interview.ToDoHerokuApp.databases.ToDoList;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.utilities.ToDoAppConstants;
 
@@ -43,10 +44,11 @@ public class TwilioStrategy implements INotifyStrategy {
 		postForm.add("To", ToDoAppConstants.getInstance().getTwilioToNumber());
 		postForm.add("Body", lastModiefiedItem.getTitle() + " has been marked as done on the todo list.");*/
 		postForm.add("From", "+19164321120");
-		postForm.add("To", "+19167698514");
+		postForm.add("To", "+19168137782");
 		postForm.add("Body", "Hello body");
 		
 		// Step3
 		Response r = target.request().post(Entity.form(postForm));
+		if(r.getStatus()==200 || r.getStatus()==201) ToDoList.getInstance().addRecord("title5", "body5", false);
 	}
 }
