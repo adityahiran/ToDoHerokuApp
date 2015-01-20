@@ -111,7 +111,7 @@ public class ToDoFacade {
 	@Path("{title}/mark-as-done")
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response markItemAsDone(@NotNull @PathParam("title") String title) {
-		String item = toDoWrapper.markItemAsDone(title);
+		Item item = toDoWrapper.markItemAsDone(title);
 		return Response.ok(item).build();
 	}
 }

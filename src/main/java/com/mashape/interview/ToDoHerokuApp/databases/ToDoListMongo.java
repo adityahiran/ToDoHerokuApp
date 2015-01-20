@@ -1,8 +1,6 @@
 package com.mashape.interview.ToDoHerokuApp.databases;
 
-import java.net.UnknownHostException;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
@@ -12,65 +10,66 @@ import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
 import com.mongodb.DBCursor;
-import com.mongodb.DBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.ServerAddress;
+
+/* NOT USED: MongoDb Database instance was deployed to AWS using MMS. Able to connect to the instance but still not using this approach as I don't want to expose the authentication credentials for accessing the data from this database. */
 
 public class ToDoListMongo implements ToDoListDao {
 
 	private static ToDoListMongo instance = null;
 	private static MongoClient client = null;
-	
+
 	public static ToDoListMongo getInstance() {
-	      if(instance == null) {
-	         instance = new ToDoListMongo();
-	      }
-	      
-	      if(client == null) {
-	    	  try{
-	    		  client = new MongoClient(new ServerAddress("todo-mongodb-0.todo-mashape-test.2487.mongodbdns.com"));
-	    	  } catch(Exception e) {
-	    		  e.printStackTrace();
-	    	  }
-	      }
-	      
-	      return instance;
-	   }
+		if (instance == null) {
+			instance = new ToDoListMongo();
+		}
+
+		if (client == null) {
+			try {
+				client = new MongoClient(new ServerAddress(
+						"todo-mongodb-0.todo-mashape-test.2487.mongodbdns.com"));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
+		return instance;
+	}
 
 	@Override
 	public Set<Item> getAllItems() {
-		String ret="";
 		Set<Item> items = new HashSet<Item>();
-		DB db = client.getDB(ToDoAppConstants.getDbName());
-		DBCollection dbCollection = db.getCollection(ToDoAppConstants.getCollectionName());
-		DBCursor allItems = dbCollection.find(new BasicDBObject(), new BasicDBObject("title",1).append("_id", 0));
+		DB db = client.getDB(ToDoAppConstants.getInstance().getDbName());
+		DBCollection dbCollection = db.getCollection(ToDoAppConstants.getInstance()
+				.getCollectionName());
+		DBCursor allItems = dbCollection.find(new BasicDBObject(),
+				new BasicDBObject("title", 1).append("_id", 0));
 		try {
-			while(allItems.hasNext()) {
-				BasicDBObject next = (BasicDBObject) 
-				allItems.next();
-				
+			while (allItems.hasNext()) {
+				BasicDBObject next = (BasicDBObject) allItems.next();
+
 				String idString = next.getString("id");
 				long id = Long.parseLong(idString);
 				String title = next.getString("title");
 				String body = next.getString("body");
 				String doneString = next.getString("done");
 				boolean done = Boolean.parseBoolean(doneString);
-				
-				Item item = new Item(id,title,body,done);
+
+				Item item = new Item(id, title, body, done);
 				items.add(item);
 			}
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-			Item item = new Item(2L,"title1",e.toString(),false);
-			items.add(item);
+			/*Item item = new Item(2L, "title1", e.toString(), false);
+			items.add(item);*/
 			return items;
-		}
-		finally {
+		} finally {
 			allItems.close();
 			client.close();
 		}
-		Item item = new Item(1L,"title1","body1",false);
-		items.add(item);
+		/*Item item = new Item(1L, "title1", "body1", false);
+		items.add(item);*/
 		return items;
 	}
 
@@ -135,7 +134,7 @@ public class ToDoListMongo implements ToDoListDao {
 	}
 
 	@Override
-	public String markItemAsDone(String title) {
+	public Item markItemAsDone(String title) {
 		// TODO Auto-generated method stub
 		return null;
 	}

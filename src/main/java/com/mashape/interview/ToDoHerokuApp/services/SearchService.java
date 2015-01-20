@@ -39,9 +39,8 @@ import io.searchbox.indices.IndicesExists;
 public class SearchService implements IObserver {
 
 	private static SearchService instance = null;
-	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance(); //ToDoListMongo.getInstance(); 
+	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance();  
 	private static JestClient jestClient = JestFactory.getJestClient();
-	private static boolean initialized = false;
 
 	// The search index in elastic search is created during the creation of this class's instance
 	public static SearchService getInstance() {
@@ -97,77 +96,6 @@ public class SearchService implements IObserver {
 		}
 	}
 	
-	/*public static void indexSampleItems() {
-
-		
-		
-		
-		 
-
-		try {
-			// Delete articles index if it is exists
-			// DeleteIndex deleteIndex = new
-			// DeleteIndex.Builder("articles").build();
-			// jestClient.execute(deleteIndex);
-
-			//DeleteIndex deleteIndex = new DeleteIndex.Builder("items").build();
-			//jestClient.execute(deleteIndex);
-			
-			IndicesExists indicesExists = new IndicesExists.Builder("itemsNew")
-					.build();
-			JestResult result = jestClient.execute(indicesExists);
-
-			if (!result.isSucceeded()) {
-				// Create items index
-				CreateIndex createIndex = new CreateIndex.Builder("itemsNew")
-						.build();
-				jestClient.execute(createIndex);
-			}
-
-			*//**
-			 * if you don't want to use bulk api use below code in a loop.
-			 *
-			 * Index index = new
-			 * Index.Builder(source).index("items").type("item").build();
-			 * jestClient.execute(index);
-			 *
-			 *//*
-
-			Item[] array = (Item[])allItems.toArray();
-			Item x=array[0];
-			Item y=array[1];
-			
-			
-			Bulk bulk = new Bulk.Builder()
-					.addAction(
-							new Index.Builder(x).index("itemsNew")
-									.type("item").build())
-					.addAction(
-							new Index.Builder(y).index("itemsNew")
-									.type("item").build()).build();
-
-			result = jestClient.execute(bulk);
-			
-			//Builder bulkBuilder = new Bulk.Builder();
-			for(Object source: allItems) {		
-				Index index = new Index.Builder(source).index("items").type("item").build();
-				jestClient.execute(index);
-				//bulkBuilder.addAction(index);
-			}
-			//Bulk bulk = new Bulk(bulkBuilder);
-			//result = jestClient.execute(bulk);
-
-			initialized=true;
-		} catch (IOException e) {
-			// logger.error("Indexing error", e);
-			e.printStackTrace();
-		} catch (Exception e) {
-			// logger.error("Indexing error", e);
-			e.printStackTrace();
-		}
-
-	}*/
-
 	public Set<Item> searchItems(String param) {
 		try {
 			/* This call makes sure the indices are in sync even if the index on the elastic search is deleted while the database has other items that are not added to the index.*/
@@ -204,11 +132,12 @@ public class SearchService implements IObserver {
 	}
 
 	@Override
-	public String update(Item itemLastModified, int invokingOperation) {
+	public void update(Item itemLastModified, int invokingOperation) {
 		// invokingOperation=1 means a new record has been added to the database
 		// invokingOperation=2 means a record has been updated in the database
 		// invokingOperation=3 means an existing record has been deleted from the database
 		// invokingOperation=3 + itemLastModified==null means all existing records have been deleted from the database
+		// invokingOperation=4 means a record is marked as done
 		switch(invokingOperation) {
 		case 1: indexAnItem(itemLastModified); break;
 		case 2: updateIndexOf(itemLastModified); break;
@@ -218,7 +147,6 @@ public class SearchService implements IObserver {
 		case 4: updateIndexOf(itemLastModified); break;
 		default: break;
 		}
-		return "";
 	}
 
 	private void deleteIndexOf(Item itemLastModified) {
@@ -233,7 +161,6 @@ public class SearchService implements IObserver {
 	}
 
 	private void deleteAllIndexes() {
-		// TODO Auto-generated method stub
 		
 	}
 

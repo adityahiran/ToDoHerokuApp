@@ -23,12 +23,11 @@ public class NotifyService implements IObserver {
 	}
 
 	@Override
-	public String update(Item lastModifiedItem, int invokingOperation) {
+	public void update(Item lastModifiedItem, int invokingOperation) {
 		String response = "";
 		if((invokingOperation == 4) && (lastModifiedItem != null)) {
-			response = notifyStrategy.sendNotification(lastModifiedItem);
+			notifyStrategy.sendNotification(lastModifiedItem);
 		} 
-		return response;
 		
 		// Having a trial account on twilio doesn't allow us to send free sms.
 		// Used this logic to see if twilio's response is a success. 
