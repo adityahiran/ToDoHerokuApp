@@ -15,8 +15,27 @@ public class ToDoAppConstants {
 	private static final String TWILIO_FROM_NUMBER = "+19164321120";
 	private static final String TWILIO_TO_NUMBER = "+19168137782";
 	private static String TWILIO_SMS_URL ="https://api.twilio.com/2010-04-01/Accounts/"+ToDoAppConstants.getInstance().getTwilioAccountSid()+"/Messages.json";
-	private static Properties properties = null;
+	private static final int CRUD_CREATE = 1;
+	private static final int CRUD_UPDATE = 2;
+	private static final int CRUD_MARK_AS_DONE = 4;
+	private static final int CRUD_DELETE = 3;
 	
+	public static int getCrudCreate() {
+		return CRUD_CREATE;
+	}
+
+	public static int getCrudUpdate() {
+		return CRUD_UPDATE;
+	}
+
+	public static int getCrudMarkAsDone() {
+		return CRUD_MARK_AS_DONE;
+	}
+
+	public static int getCrudDelete() {
+		return CRUD_DELETE;
+	}
+
 	public String getTwilioSmsUrl() {
 		return TWILIO_SMS_URL;
 	}

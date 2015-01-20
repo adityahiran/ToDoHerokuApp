@@ -10,6 +10,7 @@ import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.observable.IObservable;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
 import com.mashape.interview.ToDoHerokuApp.services.NotifyService;
+import com.mashape.interview.ToDoHerokuApp.utilities.ToDoAppConstants;
 
 public class ToDoList implements IObservable {
 
@@ -38,7 +39,7 @@ public class ToDoList implements IObservable {
 		inMemoryDatabase.put(lastIndex, item);
 
 		ret = inMemoryDatabase.get(lastIndex);
-		setChanged(true, 1, ret);
+		setChanged(true, ToDoAppConstants.getInstance().getCrudCreate(), ret);
 		return ret;
 	}
 	
@@ -47,13 +48,13 @@ public class ToDoList implements IObservable {
 		if(inMemoryDatabase.containsKey(id)) {
 			ret = inMemoryDatabase.put(id, item);
 		}
-		setChanged(true, 2, ret);
+		setChanged(true, ToDoAppConstants.getInstance().getCrudUpdate(), ret);
 		return ret;
 	}
 	
 	public Item deleteItemById(long id) {
 		Item ret = inMemoryDatabase.remove(id);
-		setChanged(true, 3, ret);
+		setChanged(true, ToDoAppConstants.getInstance().getCrudDelete(), ret);
 		return ret;
 	}
 	
@@ -69,7 +70,7 @@ public class ToDoList implements IObservable {
 				break;
 			}
 		}
-		setChanged(true, 3, ret);
+		setChanged(true, ToDoAppConstants.getInstance().getCrudDelete(), ret);
 		return ret;
 	}
 	
@@ -81,7 +82,7 @@ public class ToDoList implements IObservable {
 			Long nextId = iterator.next();
 			set.add(inMemoryDatabase.remove(nextId)); 
 		}
-		setChanged(true, 3, null);
+		setChanged(true, ToDoAppConstants.getInstance().getCrudDelete(), null);
 		return set;
 	}
 	
@@ -101,7 +102,7 @@ public class ToDoList implements IObservable {
 				break;
 			}
 		}
-		setChanged(true, 2, ret);
+		setChanged(true, ToDoAppConstants.getInstance().getCrudUpdate(), ret);
 		return ret;
 	}
 	
@@ -121,7 +122,7 @@ public class ToDoList implements IObservable {
 		}
 		
 		// Notify the observers about this change
-		setChanged(true, 4, ret);
+		setChanged(true, ToDoAppConstants.getInstance().getCrudMarkAsDone(), ret);
 
 		return ret;
 	}
