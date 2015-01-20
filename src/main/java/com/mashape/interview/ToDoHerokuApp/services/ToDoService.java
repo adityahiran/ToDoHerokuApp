@@ -1,14 +1,9 @@
 package com.mashape.interview.ToDoHerokuApp.services;
 
-import java.util.Iterator;
 import java.util.Set;
-
-import javax.inject.Inject;
 
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDaoImplementation;
-import com.mashape.interview.ToDoHerokuApp.databases.ToDoList;
-import com.mashape.interview.ToDoHerokuApp.databases.ToDoListMongo;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 
 public class ToDoService {

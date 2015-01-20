@@ -16,7 +16,7 @@ public class NotifyService implements IObserver {
 			instance = new NotifyService();
 			ToDoList.getInstance().addObserver(instance);
 			
-			// Skipping the context as there is only one notify strategy we are going to use in the scope of this project.
+			// Skipping the context from the strategy Design pattern as there is only one notify strategy we are going to use in the scope of this project.
 			notifyStrategy = TwilioStrategy.getInstance();
 		}
 		return instance;
@@ -24,15 +24,8 @@ public class NotifyService implements IObserver {
 
 	@Override
 	public void update(Item lastModifiedItem, int invokingOperation) {
-		String response = "";
 		if((invokingOperation == 4) && (lastModifiedItem != null)) {
 			notifyStrategy.sendNotification(lastModifiedItem);
 		} 
-		
-		// Having a trial account on twilio doesn't allow us to send free sms.
-		// Used this logic to see if twilio's response is a success. 
-		/*if(success) {
-			ToDoList.addRecord("title5", "Created after twilio responded with a success code", false);
-		}*/
 	}
 }

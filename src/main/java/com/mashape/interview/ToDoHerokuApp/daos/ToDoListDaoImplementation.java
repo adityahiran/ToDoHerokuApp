@@ -16,7 +16,6 @@ public class ToDoListDaoImplementation implements ToDoListDao {
 	private static ToDoListDaoImplementation instance = null;
 	private static ToDoList toDoList = ToDoList.getInstance();
 	private static Hashtable<Long, Item> databaseInstance = toDoList.getDatabaseInstance();
-	private static long lastIndex = toDoList.getLastIndex();	// Same as the index of the lastInserted record in the database. This also matches with the ID of the todo-list-item's id.
 	
 	// Making sure that you cannot make an instance of this class
 	protected ToDoListDaoImplementation() {}
@@ -50,17 +49,17 @@ public class ToDoListDaoImplementation implements ToDoListDao {
 	
 	@Override
 	public Item addItem(String title, String body, boolean done) {
-		return ToDoList.addRecord(title, body, done);
+		return toDoList.addRecord(title, body, done);
 	}
 	
 	@Override
 	public Item updateItemById(long id, Item item) {
-		return ToDoList.updateItemById(id, item);
+		return toDoList.updateItemById(id, item);
 	}
 	
 	@Override
 	public Item deleteItemByKey(long id) {
-		return ToDoList.deleteItemById(id);
+		return toDoList.deleteItemById(id);
 	}
 	
 	@Override
@@ -101,31 +100,29 @@ public class ToDoListDaoImplementation implements ToDoListDao {
 	@Override
 	public Item deleteItemByTitle(String title) {
 		// As the title is unique for each todo-list-item, we can delete an item by providing its title
-		return ToDoList.deleteItemByTitle(title);
+		return toDoList.deleteItemByTitle(title);
 	}
 
 	@Override
 	public Set<Item> deleteAllItems() {
-		return ToDoList.deleteAllItems();
+		return toDoList.deleteAllItems();
 	}
 
 	@Override
 	public Item updateItem(String oldTitle, String newTitle, String newBody) {
 		// Identify an item by its title, update either its title or its body or both.
-		return ToDoList.updateItem(oldTitle, newTitle, newBody);
+		return toDoList.updateItem(oldTitle, newTitle, newBody);
 	}
 
 	@Override
 	public Item markItemAsDone(String title) {
 		// Update an item's status from undone to done
-		return ToDoList.markItemAsDone(title);
+		return toDoList.markItemAsDone(title);
 	}
 
 	@Override
 	public Item getLastItem() {
 		// Get the last inserted record in the database 
-		return ToDoList.getLastItem();
+		return toDoList.getLastItem();
 	}
-	
-	
 }

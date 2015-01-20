@@ -1,18 +1,14 @@
 package com.mashape.interview.ToDoHerokuApp.databases;
 
 import java.util.ArrayList;
-import java.util.Enumeration;
 import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Set;
 
-import org.elasticsearch.common.mvel2.optimizers.impl.refl.nodes.Notify;
-
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.observable.IObservable;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
-import com.mashape.interview.ToDoHerokuApp.services.NotifyService;
 
 public class ToDoList implements IObservable {
 
@@ -22,18 +18,17 @@ public class ToDoList implements IObservable {
 	private static long lastIndex=0L;
 	private static ArrayList<IObserver> observers = new ArrayList<IObserver>();
 	private static boolean changed = false;
-	private static NotifyService notifyService = NotifyService.getInstance();
-	//operation = 1 for create; 2 for update; 3 for delete
+	//operation = 1 for create; 2 for update; 3 for delete; 4 for marking-item-as-done
 	
 	protected ToDoList() {
-		// Doesn't allow instantiation of this class 
+		// Doesn't allow instantiation of this class as it is declared protected.
 	}
 	
-	public static Hashtable<Long, Item> getDatabaseInstance() {
+	public Hashtable<Long, Item> getDatabaseInstance() {
 		return inMemoryDatabase;
 	}
 	
-	public static Item addRecord(String title, String body, boolean done) {
+	public Item addRecord(String title, String body, boolean done) {
 		Item ret = null;
 
 		lastIndex++;
@@ -45,21 +40,22 @@ public class ToDoList implements IObservable {
 		return ret;
 	}
 	
-	public static Item updateItemById(long id, Item item) {
+	public Item updateItemById(long id, Item item) {
 		Item ret = null;
-		if(inMemoryDatabase.containsKey(id))
-			ret = inMemoryDatabase.put(id, item);	
+		if(inMemoryDatabase.containsKey(id)) {
+			ret = inMemoryDatabase.put(id, item);
+		}
 		setChanged(true, 2, ret);
 		return ret;
 	}
 	
-	public static Item deleteItemById(long id) {
+	public Item deleteItemById(long id) {
 		Item ret = inMemoryDatabase.remove(id);
 		setChanged(true, 3, ret);
 		return ret;
 	}
 	
-	public static Item deleteItemByTitle(String title) {
+	public Item deleteItemByTitle(String title) {
 		Item ret = null;
 		Set<Long> keySet = inMemoryDatabase.keySet();
 		Iterator<Long> iterator = keySet.iterator();
@@ -75,8 +71,7 @@ public class ToDoList implements IObservable {
 		return ret;
 	}
 	
-	public static Set<Item> deleteAllItems() {
-		// TODO Add a callback to delete the indexes on Elastic Search
+	public Set<Item> deleteAllItems() {
 		Set<Item> set = new HashSet<Item>();
 		Set<Long> keySet = inMemoryDatabase.keySet();
 		Iterator<Long> iterator = keySet.iterator();
@@ -88,7 +83,7 @@ public class ToDoList implements IObservable {
 		return set;
 	}
 	
-	public static Item updateItem(String oldTitle, String newTitle, String newBody) {
+	public Item updateItem(String oldTitle, String newTitle, String newBody) {
 		Item ret = null;
 		Set<Long> keySet = inMemoryDatabase.keySet();
 		Iterator<Long> iterator = keySet.iterator();
@@ -108,7 +103,7 @@ public class ToDoList implements IObservable {
 		return ret;
 	}
 	
-	public static Item markItemAsDone(String title) {
+	public Item markItemAsDone(String title) {
 		Item ret = null;
 		Set<Long> keySet = inMemoryDatabase.keySet();
 		Iterator<Long> iterator = keySet.iterator();
@@ -129,19 +124,19 @@ public class ToDoList implements IObservable {
 		return ret;
 	}
 	
-	private static void initData() {
+	private void initData() {
 		lastIndex=0L;
-		getInstance().getDatabaseInstance().put(lastIndex, new Item(lastIndex, "title1", "body1", true));
+		inMemoryDatabase.put(lastIndex, new Item(lastIndex, "title1", "body1", true));
 		lastIndex= lastIndex + 1L;
-		getInstance().getDatabaseInstance().put(lastIndex, new Item(lastIndex, "title2", "body2", false));
+		inMemoryDatabase.put(lastIndex, new Item(lastIndex, "title2", "body2", false));
 		lastIndex= lastIndex + 1L;
-		getInstance().getDatabaseInstance().put(lastIndex, new Item(lastIndex, "title3", "body2 title1", false));
+		inMemoryDatabase.put(lastIndex, new Item(lastIndex, "title3", "body2 title1", false));
 	}
 	
 	 public static ToDoList getInstance() {
 	      if(instance == null) {
 	         instance = new ToDoList();
-	         initData();
+	         instance.initData();
 	      }
 	      return instance;
 	   }
@@ -155,18 +150,17 @@ public class ToDoList implements IObservable {
 		observers.add(obs);
 	}
 
-	public static boolean hasChanged() {
+	public boolean hasChanged() {
 		return changed;
 	}
 
-	public static void setChanged(boolean hasChanged, int operation, Item lastModifiedItem) {
+	public void setChanged(boolean hasChanged, int operation, Item lastModifiedItem) {
 		ToDoList.changed = hasChanged;
 		instance.notifyObservers(operation, lastModifiedItem);
 	}
 	
 	@Override
 	public void notifyObservers(int invokingOperation, Item lastModifiedItem) {
-		String ret = "";
 		Iterator<IObserver> iter = observers.iterator();
 		while(iter.hasNext()) {
 			IObserver observer = iter.next();
@@ -175,7 +169,7 @@ public class ToDoList implements IObservable {
 		changed = false;
 	}
 
-	public static Item getLastItem() {
+	public Item getLastItem() {
 		return inMemoryDatabase.get(lastIndex);
 	}
 }

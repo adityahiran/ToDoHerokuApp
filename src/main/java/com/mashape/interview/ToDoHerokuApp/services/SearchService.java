@@ -7,33 +7,22 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
-import org.elasticsearch.index.query.FilteredQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
-
-import static org.elasticsearch.index.query.QueryBuilders.filteredQuery;
-import static org.elasticsearch.index.query.QueryBuilders.termQuery;
 
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDao;
 import com.mashape.interview.ToDoHerokuApp.daos.ToDoListDaoImplementation;
 import com.mashape.interview.ToDoHerokuApp.databases.ToDoList;
-import com.mashape.interview.ToDoHerokuApp.databases.ToDoListMongo;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.factories.JestFactory;
-import com.mashape.interview.ToDoHerokuApp.observable.IObservable;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
-import io.searchbox.core.Bulk;
-import io.searchbox.core.Bulk.Builder;
-import io.searchbox.core.Delete;
 import io.searchbox.core.DeleteByQuery;
 import io.searchbox.core.Index;
 import io.searchbox.core.Search;
 import io.searchbox.indices.CreateIndex;
-import io.searchbox.indices.DeleteIndex;
 import io.searchbox.indices.IndicesExists;
 
 public class SearchService implements IObserver {
@@ -66,8 +55,6 @@ public class SearchService implements IObserver {
 				// Add data to be indexed
 				addDataToBeIndexed();
 			}
-			
-			
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -88,7 +75,8 @@ public class SearchService implements IObserver {
 		try {
 			long id = source.getId();
 			String s = String.valueOf(id);
-			JestResult result = jestClient.execute(new Index.Builder(source).index("items").type("item").id(s).build());
+			// Jest Id should be specified for building the index as id is of type long. String types needn't be specified explicitly. 
+			jestClient.execute(new Index.Builder(source).index("items").type("item").id(s).build());
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
@@ -120,7 +108,7 @@ public class SearchService implements IObserver {
 			List<Item> items = new ArrayList<Item>();
 			items.addAll(searchInTitleResultList);
 			items.addAll(searchInBodyResultList);
-			Set<Item> itemsSet = new HashSet(items);
+			Set<Item> itemsSet = new HashSet<Item>(items);
 			return itemsSet;
 
 		} catch (IOException e) {
@@ -150,7 +138,6 @@ public class SearchService implements IObserver {
 	}
 
 	private void deleteIndexOf(Item itemLastModified) {
-		String id = String.valueOf(itemLastModified.getId());
 		try {
 			SearchSourceBuilder searchSourceBuilder = new SearchSourceBuilder();
 			searchSourceBuilder.query(QueryBuilders.matchQuery("title", itemLastModified.getTitle()));

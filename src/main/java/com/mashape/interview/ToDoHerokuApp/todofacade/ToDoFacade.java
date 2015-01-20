@@ -1,6 +1,5 @@
 package com.mashape.interview.ToDoHerokuApp.todofacade;
 
-import java.util.List;
 import java.util.Set;
 
 import javax.validation.constraints.NotNull;
