@@ -27,7 +27,7 @@ public class TwilioStrategy implements INotifyStrategy {
 	}
 
 	@Override
-	public String sendNotification(Item lastModiefiedItem) {
+	public void sendNotification(Item lastModiefiedItem) {
 		
 		// Step1
 		Client client = ClientBuilder.newClient();
@@ -51,7 +51,5 @@ public class TwilioStrategy implements INotifyStrategy {
 		
 		// Step3
 		Response r = target.request().post(Entity.form(postForm));
-		if(r.getStatus()==200 || r.getStatus()==201) ToDoList.getInstance().addRecord("title5", "body5", false);
-		return "response: "+r.getStatus();
 	}
 }

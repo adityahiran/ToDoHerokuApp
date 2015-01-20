@@ -22,11 +22,9 @@ public class NotifyService implements IObserver {
 	}
 
 	@Override
-	public String update(Item lastModifiedItem, int invokingOperation) {
-		String ret="";
+	public void update(Item lastModifiedItem, int invokingOperation) {
 		if((invokingOperation == 4) && (lastModifiedItem != null)) {
-			ret=notifyStrategy.sendNotification(lastModifiedItem);
+			notifyStrategy.sendNotification(lastModifiedItem);
 		} 
-		return ret+"response";
 	}
 }
