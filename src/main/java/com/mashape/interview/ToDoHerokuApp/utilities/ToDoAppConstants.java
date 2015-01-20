@@ -14,7 +14,7 @@ public class ToDoAppConstants {
 	private static String TWILIO_ACCOUNT_PASSWORD = null;
 	private static final String TWILIO_FROM_NUMBER = "+19164321120";
 	private static final String TWILIO_TO_NUMBER = "+19168137782";
-	private static final String TWILIO_SMS_URL = "https://api.twilio.com/2010-04-01/Accounts/"+ToDoAppConstants.getInstance().getTwilioAccountSid()+"/Messages.json";
+	private static String TWILIO_SMS_URL = "https://api.twilio.com/2010-04-01/Accounts/"+ToDoAppConstants.getInstance().getTwilioAccountSid()+"/Messages.json";
 	private static Properties properties = null;
 	
 	public String getTwilioSmsUrl() {
@@ -40,7 +40,7 @@ public class ToDoAppConstants {
 	public static ToDoAppConstants getInstance() {
 		if(instance == null) {
 			instance = new ToDoAppConstants();
-			instance.initData();
+			//instance.initData();
 		}
 		return instance;
 	}
@@ -69,6 +69,7 @@ public class ToDoAppConstants {
 				properties.load(in);
 				TWILIO_ACCOUNT_SID = properties.getProperty("TWILIO_ACCOUNT_SID");
 				TWILIO_ACCOUNT_PASSWORD = properties.getProperty("TWILIO_ACCOUNT_PASSWORD");
+				TWILIO_SMS_URL = "https://api.twilio.com/2010-04-01/Accounts/"+TWILIO_ACCOUNT_SID+"/Messages.json";
 			}
 		} catch(IOException e) {
 			e.printStackTrace();
