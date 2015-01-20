@@ -14,11 +14,11 @@ public class NotifyService implements IObserver {
 	public static NotifyService getInstance() {
 		if (instance == null) {
 			instance = new NotifyService();
-			ToDoList.getInstance().addObserver(instance);
 			
 			// Skipping the context from the strategy Design pattern as there is only one notify strategy we are going to use in the scope of this project.
 			notifyStrategy = TwilioStrategy.getInstance();
 		}
+		ToDoList.getInstance().addObserver(instance);
 		return instance;
 	}
 
