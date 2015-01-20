@@ -10,7 +10,7 @@ public class ToDoAppConstants {
 	private static final String DB_NAME = "todo-db";
 	private static final String COLLECTION_NAME = "items";
 	private static final String JEST_URL= "https://site:feadc2f4d2e573c710cad584185a8965@bofur-us-east-1.searchly.com";
-	private static String TWILIO_ACCOUNT_SID = "ACad0b05acb0ff8d54e96a5684cdeed25d";
+	private static String TWILIO_ACCOUNT_SID = "ACad0b05acb0ff8d54e96a5684cdeed25d"; // This could be made more secure on a production level code.
 	private static String TWILIO_ACCOUNT_PASSWORD = "0263a083588152039b192a5ff9143ff1";
 	private static final String TWILIO_FROM_NUMBER = "+19164321120";
 	private static final String TWILIO_TO_NUMBER = "+19168137782";
@@ -20,19 +20,19 @@ public class ToDoAppConstants {
 	private static final int CRUD_MARK_AS_DONE = 4;
 	private static final int CRUD_DELETE = 3;
 	
-	public static int getCrudCreate() {
+	public int getCrudCreate() {
 		return CRUD_CREATE;
 	}
 
-	public static int getCrudUpdate() {
+	public int getCrudUpdate() {
 		return CRUD_UPDATE;
 	}
 
-	public static int getCrudMarkAsDone() {
+	public int getCrudMarkAsDone() {
 		return CRUD_MARK_AS_DONE;
 	}
 
-	public static int getCrudDelete() {
+	public int getCrudDelete() {
 		return CRUD_DELETE;
 	}
 

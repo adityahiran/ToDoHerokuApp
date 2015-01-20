@@ -7,6 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.lucene.util.Constants;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 
@@ -16,6 +17,7 @@ import com.mashape.interview.ToDoHerokuApp.databases.ToDoList;
 import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.factories.JestFactory;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
+import com.mashape.interview.ToDoHerokuApp.utilities.ToDoAppConstants;
 
 import io.searchbox.client.JestClient;
 import io.searchbox.client.JestResult;
@@ -27,6 +29,7 @@ import io.searchbox.indices.IndicesExists;
 
 public class SearchService implements IObserver {
 
+	// Could have created a strategy pattern just like how I did in the Twilio Strategy. But at this point as there are no other search strategies planned, this refactoring is skipped.
 	private static SearchService instance = null;
 	private static ToDoListDao dao = ToDoListDaoImplementation.getInstance();  
 	private static JestClient jestClient = JestFactory.getJestClient();

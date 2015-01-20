@@ -5,6 +5,7 @@ import com.mashape.interview.ToDoHerokuApp.domains.Item;
 import com.mashape.interview.ToDoHerokuApp.observable.IObserver;
 import com.mashape.interview.ToDoHerokuApp.strategies.INotifyStrategy;
 import com.mashape.interview.ToDoHerokuApp.strategies.TwilioStrategy;
+import com.mashape.interview.ToDoHerokuApp.utilities.ToDoAppConstants;
 
 public class NotifyService implements IObserver {
 
@@ -23,7 +24,7 @@ public class NotifyService implements IObserver {
 
 	@Override
 	public void update(Item lastModifiedItem, int invokingOperation) {
-		if((invokingOperation == 4) && (lastModifiedItem != null)) {
+		if((invokingOperation == ToDoAppConstants.getInstance().getCrudMarkAsDone()) && (lastModifiedItem != null)) {
 			notifyStrategy.sendNotification(lastModifiedItem);
 		} 
 	}
